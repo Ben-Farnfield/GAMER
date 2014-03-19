@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+
+@import url(http://openfontlibrary.org/face/linearmente);
+
+h1 {
+	color: #1B1916;
+	float: left;
+	font: 70pt/5px 'Linearmente';
+}
+
+#header {
+	margin: 0px auto;
+	overflow: auto;
+	width: 960px;
+}

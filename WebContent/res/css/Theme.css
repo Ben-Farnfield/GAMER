@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+
+@import url(http://openfontlibrary.org/face/jura);
+
+body {
+	background-color: #E0E0E0;
+	background-image: url(/GAMER/res/img/misc/lines.png);
+	background-size: 10px 10px;
+	font-family: 'Jura';
+	color: #222;
+	margin: 0px;
+}
+
+a {
+	text-decoration: none;
+}

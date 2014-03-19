@@ -1,0 +1,53 @@
+@CHARSET "UTF-8";
+
+#top-bar {
+	background-color: #1B1916;
+	border: 2px none #59524B;
+	border-bottom-style: solid;
+	height: 40px;
+}
+
+#top-bar table {
+	float: right;
+}
+
+#top-bar td {
+	padding-right: 32px;
+}
+
+#top-bar input {
+	border: 1px solid #1B1916;
+}
+
+#top-bar a {
+	color: #FFF;
+}
+
+#top-bar a:hover {
+	text-decoration: underline;
+}
+
+#inner-top-bar {
+	margin: 0px auto;
+	overflow: auto;
+	padding: 5px;
+	width: 960px;
+}
+
+#search-field {
+	height: 21px;
+	float: left;
+}
+
+#search-button {
+	background-color: #7A756F;
+	background-image: url(/GAMER/res/img/icons/search_20x20_white.png);
+	background-position: 12px 1px;
+	background-repeat: no-repeat;
+	width: 50px;
+	height: 25px;
+}
+
+input#search-button:hover {
+	background-color: #0087EC;
+}

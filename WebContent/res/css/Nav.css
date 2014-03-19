@@ -1,0 +1,45 @@
+@CHARSET "UTF-8";
+
+#nav {
+	background-color: #E0E0E0;
+	border: 1px solid #D1D1D1;
+	height: 40px;
+	margin: 0px auto;
+	overflow: auto;
+	width: 960px;
+	-moz-box-shadow: 0 0 5px #999;
+	-webkit-box-sadow: 0 0 5px #999;
+	box-shadow: 0 0 5px #999;
+}
+
+#nav ul {
+	margin: 0px 0px;
+}
+
+#nav li {
+	display: inline;
+}
+
+#nav a {
+	color: #666;
+	display: inline-block;
+	font-size: 18pt;
+	font-weight: bold;
+	line-height: 0px;
+	padding: 2% 7.9%;
+}
+
+#nav a:hover {
+	border-bottom-style: solid;
+	border-color: #D1D1D1;
+	border-width: 4px;
+}
+
+body.home a#home, 
+body.games a#games,
+body.toys a#toys,
+body.basket a#basket {
+	border-bottom-style: solid;
+	border-color: #0087EC;
+	border-width: 4px;
+}
