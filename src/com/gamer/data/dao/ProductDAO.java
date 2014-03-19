@@ -3,45 +3,21 @@ package com.gamer.data.dao;
 import java.util.ArrayList;
 
 import com.gamer.beans.ProductBean;
+import com.gamer.beans.ProductBeans;
 
 public class ProductDAO {
 
-	public ArrayList<ProductBean> getProductsForPage(int pageNum) {
-		ArrayList<ProductBean> products = new ArrayList<>();
+	public ProductBeans getProducts() {
+		ProductBeans productBeans = new ProductBeans();
 		
-		String name;
-		double price;
-		String desc;
-		String genre;
-		String picUrl;
-		int quantity;
-		
-		if (pageNum == 1) {
-			name = "Call of Duty 2";
-			price = 35;
-			desc = "This is a description";
-			genre = "FPS";
-			picUrl = "/GAMER/res/img/pics/games/COD_2.png";
-			quantity = 5;
-		} else if (pageNum == 2) {
-			name = "COD Black Ops 2";
-			price = 25;
-			desc = "This is a description";
-			genre = "FPS";
-			picUrl = "/GAMER/res/img/pics/games/COD_black_ops_2.png";
-			quantity = 10;
-		} else if (pageNum == 3) {
-			name = "Dayz";
-			price = 35;
-			desc = "This is a description";
-			genre = "RPG";
-			picUrl = "/GAMER/res/img/pics/games/dayz.png";
-			quantity = 5;
-		} else {
-			return new ArrayList<ProductBean>();
-		}
-		
-		for (int i=0; i<9; i++) {
+		String name = "Call of Duty 2";
+		double price = 35;
+		String desc = "This is a description";
+		String genre = "FPS";
+		String picUrl = "/GAMER/res/img/pics/games/COD_2.png";
+		int quantity  = 5;
+
+		for (int i=0; i<12; i++) {
 			ProductBean product = new ProductBean();
 			product.setName(name);
 			product.setPrice(price);
@@ -49,44 +25,57 @@ public class ProductDAO {
 			product.setGenre(genre);
 			product.setPictureURI(picUrl);
 			product.setQuantity(quantity);
-			products.add(product);
+			productBeans.addProduct(product);
 		}
 		
-		return products;
+		name = "COD Black Ops 2";
+		price = 25;
+		desc = "This is a description";
+		genre = "FPS";
+		picUrl = "/GAMER/res/img/pics/games/COD_black_ops_2.png";
+		quantity = 10;
+		
+		for (int i=0; i<12; i++) {
+			ProductBean product = new ProductBean();
+			product.setName(name);
+			product.setPrice(price);
+			product.setDescription(desc);
+			product.setGenre(genre);
+			product.setPictureURI(picUrl);
+			product.setQuantity(quantity);
+			productBeans.addProduct(product);
+		}
+		
+		name = "Dayz";
+		price = 35;
+		desc = "This is a description";
+		genre = "RPG";
+		picUrl = "/GAMER/res/img/pics/games/dayz.png";
+		quantity = 5;
+		
+		for (int i=0; i<12; i++) {
+			ProductBean product = new ProductBean();
+			product.setName(name);
+			product.setPrice(price);
+			product.setDescription(desc);
+			product.setGenre(genre);
+			product.setPictureURI(picUrl);
+			product.setQuantity(quantity);
+			productBeans.addProduct(product);
+		}
+		
+		return productBeans;
 	}
 	
-	public ArrayList<ProductBean> getGamesForPage(int pageNum) {
-		ArrayList<ProductBean> products = new ArrayList<>();
+	public ProductBeans getGames() {
+		ProductBeans productBeans = new ProductBeans();
 		
-		String name;
-		double price;
-		String desc;
-		String genre;
-		String picUrl;
-		int quantity;
-		
-		if (pageNum == 1) {
-			name = "Battlefield 3";
-			price = 35;
-			desc = "This is a description";
-			genre = "FPS";
-			picUrl = "/GAMER/res/img/pics/games/BC_3.png";
-			quantity = 5;
-		} else if (pageNum == 2) {
-			name = "Crysis 2";
-			price = 25;
-			desc = "This is a description";
-			genre = "FPS";
-			picUrl = "/GAMER/res/img/pics/games/crysis_2.png";
-			quantity = 10;
-		} else {
-			name = "Mass Effect 3";
-			price = 35;
-			desc = "This is a description";
-			genre = "RPG";
-			picUrl = "/GAMER/res/img/pics/games/mass_effect_3.png";
-			quantity = 5;
-		}
+		String name = "Battlefield 3";
+		double price = 35;
+		String desc = "This is a description";
+		String genre = "FPS";
+		String picUrl = "/GAMER/res/img/pics/games/BC_3.png";
+		int quantity = 5;
 		
 		for (int i=0; i<9; i++) {
 			ProductBean product = new ProductBean();
@@ -96,10 +85,46 @@ public class ProductDAO {
 			product.setGenre(genre);
 			product.setPictureURI(picUrl);
 			product.setQuantity(quantity);
-			products.add(product);
+			productBeans.addProduct(product);
+		}
+
+		name = "Crysis 2";
+		price = 25;
+		desc = "This is a description";
+		genre = "FPS";
+		picUrl = "/GAMER/res/img/pics/games/crysis_2.png";
+		quantity = 10;
+		
+		for (int i=0; i<9; i++) {
+			ProductBean product = new ProductBean();
+			product.setName(name);
+			product.setPrice(price);
+			product.setDescription(desc);
+			product.setGenre(genre);
+			product.setPictureURI(picUrl);
+			product.setQuantity(quantity);
+			productBeans.addProduct(product);
 		}
 		
-		return products;
+		name = "Mass Effect 3";
+		price = 35;
+		desc = "This is a description";
+		genre = "RPG";
+		picUrl = "/GAMER/res/img/pics/games/mass_effect_3.png";
+		quantity = 5;
+		
+		for (int i=0; i<9; i++) {
+			ProductBean product = new ProductBean();
+			product.setName(name);
+			product.setPrice(price);
+			product.setDescription(desc);
+			product.setGenre(genre);
+			product.setPictureURI(picUrl);
+			product.setQuantity(quantity);
+			productBeans.addProduct(product);
+		}
+		
+		return productBeans;
 	}
 	
 	public ArrayList<ProductBean> getToysForPage(int pageNum) {
