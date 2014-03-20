@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.gamer.beans.ProductBean" %>
+<%@ page import="com.gamer.beans.ProductBean,com.gamer.beans.ProductBeansWrapper" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html>
@@ -13,37 +13,21 @@
 <link rel="stylesheet" type="text/css" href="/GAMER/res/css/Content.css">
 <link rel="stylesheet" type="text/css" href="/GAMER/res/css/Footer.css">
 <link rel="stylesheet" type="text/css" href="/GAMER/res/css/Product.css">
+<link rel="stylesheet" type="text/css" href="/GAMER/res/css/PagesBar.css">
 </head>
 <body class="games">
-<jsp:include page="/res/template/TopBar.jsp"  flush="true"/>
-<jsp:include page="/res/template/Header.jsp"  flush="true"/>
-<jsp:include page="/res/template/Nav.jsp"  flush="true"/>
+<jsp:include page="/res/template/TopBar.jsp" flush="true"/>
+<jsp:include page="/res/template/Header.jsp" flush="true"/>
+<jsp:include page="/res/template/Nav.jsp" flush="true"/>
 <div id="content">
-<%
-@SuppressWarnings("unchecked")
-ArrayList<ProductBean> products = 
-	(ArrayList<ProductBean>)session.getAttribute("gamer.products");
-if (products == null) {
+<%	
+if (session.getAttribute("gamer.products") == null) {
 	response.sendRedirect("/GAMER/shop?page=games");
-} else {
-	for (ProductBean product : products) {
+}
 %>
-<div class="prod">
-<img src="<%= product.getPictureURI() %>" alt="<%= product.getName() %>">						
-<h2>£ <%= product.getPrice() %> : <%= product.getName() %></h2>
-<p>
-<em>Genre: <%= product.getGenre() %></em>
-<br/>
-<br/>
-<%= product.getDescription() %>	
-</p>
-<input type="submit" value="Add to Basket" />
-</div>
-<%		
-	} // for (Product product : products) {
-} // else {
-%>
+<jsp:include page="/res/template/ProductDisplay.jsp" flush="true"/>
+<jsp:include page="/res/template/PagesBar.jsp" flush="true"/>
 </div> <!-- END content -->
-<jsp:include page="/res/template/Footer.jsp"  flush="true"/>
+<jsp:include page="/res/template/Footer.jsp" flush="true"/>
 </body>
 </html>

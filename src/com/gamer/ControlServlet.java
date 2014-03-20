@@ -1,7 +1,6 @@
 package com.gamer;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.gamer.beans.ProductBean;
+import com.gamer.beans.ProductBeansWrapper;
 import com.gamer.data.dao.ProductDAO;
 
 /**
@@ -55,14 +54,14 @@ public class ControlServlet extends HttpServlet {
 		}
 				
 		ProductDAO dao = new ProductDAO();
-		ArrayList<ProductBean> products = new ArrayList<>();
+		ProductBeansWrapper productBeans = null;
 		
 		String url = "/";
 		
 		switch (page) {
 
 		case "games":
-			products = dao.getGamesForPage(pageNum);
+			productBeans = dao.getGames();
 			url += "Games.jsp?n=" + pageNum;
 			break;
 		case "toys":
@@ -72,11 +71,11 @@ public class ControlServlet extends HttpServlet {
 			
 			break;
 		default:
-			products = dao.getProductsForPage(pageNum);
+			productBeans = dao.getProducts();
 			url += "Home.jsp?n=" + pageNum;
 			break;
 		}
-		session.setAttribute("gamer.products", products);
+		session.setAttribute("gamer.products", productBeans);
 		session.setAttribute("gamer.n", pageNum);
 		getServletContext().getRequestDispatcher(url).forward(req, res);
 	}

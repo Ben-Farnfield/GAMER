@@ -1,0 +1,50 @@
+@CHARSET "UTF-8";
+
+div#pages-bar {
+	float: left;
+	overflow: auto;
+	width: 960px;
+	height: 65px;
+
+	-moz-box-shadow: 0 5px 5px #999;
+	-webkit-box-sadow: 0 5px 5px #999;
+	box-shadow: 0 5px 5px #999;
+}
+
+#pages-bar p {
+	letter-spacing: 5px;
+}
+
+span#current-page {
+	font-weight: bold;
+	font-size: 16pt;
+	color: #0087EC;
+}
+
+#pages-bar table {
+	width: 600px;
+	margin: 0px 180px;
+}
+
+#pages-bar td {
+	width: 200px;
+	text-align: center;
+}
+
+#pages-bar input {
+	/*
+	background-color: #E0E0E0;
+	border: 1px solid #D1D1D1;
+	*/
+	background-color: transparent;
+	border: 1px solid transparent;
+	height: 30px;
+	width: 150px;
+	display: block;
+	margin: 0px auto;
+}
+
+#pages-bar input:hover {
+	/*background-color: #F0F0F0;*/
+	border: 1px solid #D1D1D1;
+}

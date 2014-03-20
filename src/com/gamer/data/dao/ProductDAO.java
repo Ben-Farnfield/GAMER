@@ -3,12 +3,12 @@ package com.gamer.data.dao;
 import java.util.ArrayList;
 
 import com.gamer.beans.ProductBean;
-import com.gamer.beans.ProductBeans;
+import com.gamer.beans.ProductBeansWrapper;
 
 public class ProductDAO {
 
-	public ProductBeans getProducts() {
-		ProductBeans productBeans = new ProductBeans();
+	public ProductBeansWrapper getProducts() {
+		ProductBeansWrapper productBeans = new ProductBeansWrapper();
 		
 		String name = "Call of Duty 2";
 		double price = 35;
@@ -17,7 +17,7 @@ public class ProductDAO {
 		String picUrl = "/GAMER/res/img/pics/games/COD_2.png";
 		int quantity  = 5;
 
-		for (int i=0; i<12; i++) {
+		for (int i=0; i<13; i++) {
 			ProductBean product = new ProductBean();
 			product.setName(name);
 			product.setPrice(price);
@@ -35,7 +35,7 @@ public class ProductDAO {
 		picUrl = "/GAMER/res/img/pics/games/COD_black_ops_2.png";
 		quantity = 10;
 		
-		for (int i=0; i<12; i++) {
+		for (int i=0; i<13; i++) {
 			ProductBean product = new ProductBean();
 			product.setName(name);
 			product.setPrice(price);
@@ -53,7 +53,7 @@ public class ProductDAO {
 		picUrl = "/GAMER/res/img/pics/games/dayz.png";
 		quantity = 5;
 		
-		for (int i=0; i<12; i++) {
+		for (int i=0; i<13; i++) {
 			ProductBean product = new ProductBean();
 			product.setName(name);
 			product.setPrice(price);
@@ -67,8 +67,8 @@ public class ProductDAO {
 		return productBeans;
 	}
 	
-	public ProductBeans getGames() {
-		ProductBeans productBeans = new ProductBeans();
+	public ProductBeansWrapper getGames() {
+		ProductBeansWrapper productBeans = new ProductBeansWrapper();
 		
 		String name = "Battlefield 3";
 		double price = 35;
