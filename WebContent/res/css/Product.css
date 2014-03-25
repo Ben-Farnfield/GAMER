@@ -1,17 +1,16 @@
 @CHARSET "UTF-8";
 
 .prod {
+	background-color: rgba(27, 25, 22, 0.9);
+	border: 1px solid rgba(27, 25, 22, 0.9);
+	border-radius: 5px;
 	float: left;
 	height: 500px;
 	margin: 11px;
 	padding: 10px;
-	width: 278px;
-}
-
-.prod img {
-	height: 200px;
-	margin: 5px 0px;
-	width: 278px;
+	width: 276px;
+	
+	
 }
 
 .prod h2 {
@@ -20,17 +19,25 @@
 
 .prod p {
 	text-align: justify;
+	padding: 5px;
 }
 
-.prod input {
-	background-color: #E0E0E0;
-	border: 1px solid #D1D1D1;
+.prod button {
+	background-color: rgba(25, 25, 25, 0.1);
+	border: 1px solid rgb(255, 255, 255);
+	color: rgb(255, 255, 255);
 	height: 30px;
 	width: 150px;
 	display: block;
 	margin: 0px auto;
 }
 
-.prod input:hover {
-	background-color: #F0F0F0;
+.prod button:hover {
+	background-color: rgba(25, 25, 25, 0.2);
+}
+
+.prod div.prod-img {
+	background-repeat: no-repeat;
+	height:200px;
+	width:278px;
 }

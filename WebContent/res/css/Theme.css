@@ -1,13 +1,25 @@
 @CHARSET "UTF-8";
 
-@import url(http://openfontlibrary.org/face/jura);
+@font-face {
+    font-family: 'Jura';
+    src: url('/GAMER/res/font/jura/Jura-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Jura';
+    src: url('/GAMER/res/font/jura/Jura-DemiBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
 
 body {
-	background-color: #E0E0E0;
-	background-image: url(/GAMER/res/img/misc/lines.png);
-	background-size: 10px 10px;
+	background-image: url(/GAMER/res/img/misc/Cool-Gaming-Wallpaper.jpg);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
 	font-family: 'Jura';
-	color: #222;
+	color: rgb(246, 246, 246);
 	margin: 0px;
 }
 

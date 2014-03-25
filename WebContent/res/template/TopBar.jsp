@@ -7,8 +7,8 @@
 <input id="search-field" type="text" size="26" />
 <input id="search-button" type="submit" value="" />
 </td>
-<td><a href="login.html">login</a></td>
-<td><a href="register.html">register</a></td>
+<td><a href="/GAMER/shop?action=login">login</a></td>
+<td><a href="/GAMER/shop?action=register">register</a></td>
 </tr>
 </table>
 </div> <!-- END inner-top-bar -->

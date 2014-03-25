@@ -1,6 +1,9 @@
 @CHARSET "UTF-8";
 
 #top-bar {
+	position: fixed;
+	left: 0px;
+	right: 0px;
 	background-color: #1B1916;
 	border: 2px none #59524B;
 	border-bottom-style: solid;

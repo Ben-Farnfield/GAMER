@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.gamer.beans.Product" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<c:if test="${empty pageOfProducts}">
-	<jsp:forward page="/shop?action=games"/>
-</c:if>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -15,17 +12,35 @@
 		<link rel="stylesheet" type="text/css" href="/GAMER/res/css/Nav.css">
 		<link rel="stylesheet" type="text/css" href="/GAMER/res/css/Content.css">
 		<link rel="stylesheet" type="text/css" href="/GAMER/res/css/Footer.css">
-		<link rel="stylesheet" type="text/css" href="/GAMER/res/css/Product.css">
-		<link rel="stylesheet" type="text/css" href="/GAMER/res/css/PagesBar.css">
-		<script src="/GAMER/res/js/lib/jquery-1.11.0.js"></script>
+		<link rel="stylesheet" type="text/css" href="/GAMER/res/css/LoginRegister.css">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 	</head>
-	<body class="games">
+	<body class="login">
 		<jsp:include page="/res/template/TopBar.jsp" flush="true"/>
 		<jsp:include page="/res/template/Header.jsp" flush="true"/>
 		<jsp:include page="/res/template/Nav.jsp" flush="true"/>
 		<div id="content">
-			<jsp:include page="/res/template/ProductDisplay.jsp" flush="true"/>
-			<jsp:include page="/res/template/PagesBar.jsp" flush="true"/>
+			<div id="reg-cont">
+				<h2>Login</h2>
+				<form method="post" onsubmit="">
+					<table>
+						<tr>
+							<td class="input-title">E-mail:</td>
+							<td class="input"><input id="email" type="text" maxlength="32" name="dob"></td>
+							<td id="error-email" class="error-msg"></td>
+						</tr>
+						<tr>
+							<td class="input-title">Password:</td>
+							<td class="input"><input id="pass" type="text" maxlength="32" name="password"></td>
+							<td id="error-pass" class="error-msg"></td>
+						</tr>
+						<tr>
+							<td colspan="3" align="center"><input id="submit-button" type="submit" value="Submit" /></td>
+						</tr>
+					</table>
+				</form>
+				<p>If you're not registered then go ahead and <a href="register.html">register</a> now.</p>
+			</div>
 		</div> <!-- END content -->
 		<jsp:include page="/res/template/Footer.jsp" flush="true"/>
 	</body>

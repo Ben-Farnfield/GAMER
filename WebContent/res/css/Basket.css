@@ -1,0 +1,138 @@
+@CHARSET "UTF-8";
+
+table#bask-tab {
+	border-collapse: collapse;
+}
+
+#bask-tab tr:nth-child(even) {
+	background-color: rgba(50, 48, 45, 0.4);
+	border: 1px solid rgba(27, 25, 22, 0.9);
+}
+
+th.heading {
+	color: #0087EC;
+	padding-bottom: 15px;
+}
+
+div#basket-content {
+	background-color: rgba(27, 25, 22, 0.9);
+	border: 1px solid rgba(27, 25, 22, 0.9);
+	border-radius: 5px;
+	margin: 10px;
+	padding:20px;
+}
+
+p#no-items {
+	margin: 20px 0px 20px 305px;
+}
+
+td.bask-item {
+	border: 2px none #59524B;
+	border-right-style: solid;
+	font-size: 16pt;
+	width: 300px;
+	height: 30px;
+	text-align: center;
+}
+
+th.bask-item {
+	border: 2px none #59524B;
+	border-right-style: solid;
+	width: 300px;
+	height: 30px;
+	text-align: center;
+}
+
+td.bask-price {
+	border: 2px none #59524B;
+	border-left-style: solid;
+	font-size: 16pt;
+	width: 100px;
+	height: 30px;
+	text-align: center;
+}
+
+th.bask-price {
+	text-align: center;
+}
+
+td#bask-total-fig {
+	border-color: #59524B;
+	border-width: 2px;
+	border-top-style: solid;
+	font-size: 16pt;
+	padding: 10px;
+	text-align: center;
+}
+
+td#bask-total-lab {
+	font-size: 16pt;
+	padding: 10px;
+	text-align: center;
+}
+
+td.bask-spacer, th.bask-spacer {
+	width: 237px;
+}
+
+td#purchase {
+	width: 960px;
+	padding: 20px 0 0 0;
+	text-align: right;
+}
+
+input.quan {
+	height: 21px;
+	width: 30px;
+	border: 1px solid #59524B;
+	background-color: white;
+	text-align: center;
+}
+
+input.quan-min {
+	height: 25px;
+	width: 25px;
+	border: 1px solid #59524B;
+	font-size: 13pt;
+	background-color: transparent;
+	color: rgb(255, 255, 255);
+}
+
+input.quan-min:hover {
+	border: 1px solid white;
+}
+
+input.quan-plus {
+	height: 25px;
+	width: 25px;
+	border: 1px solid #59524B;
+	background-color: transparent;
+	color: rgb(255, 255, 255);
+}
+
+input.quan-plus:hover {
+	border: 1px solid white;
+}
+
+input.rem-item {
+	height: 30px;
+	background-color: transparent;
+	border: 1px solid transparent;
+	color: rgb(255, 255, 255);
+}
+
+input.rem-item:hover {
+	border: 1px solid white;
+}
+
+input#pur-button {
+	height: 30px;
+	width: 230px;
+	background-color: transparent;
+	border: 1px solid #007AD4;
+	color: rgb(255, 255, 255);
+}
+
+input#pur-button:hover {
+	border: 1px solid white;
+}

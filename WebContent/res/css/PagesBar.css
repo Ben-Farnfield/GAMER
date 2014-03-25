@@ -3,12 +3,14 @@
 div#pages-bar {
 	float: left;
 	overflow: auto;
-	width: 960px;
+	width: 935px;
 	height: 65px;
+	margin: 10px 10px;
 
-	-moz-box-shadow: 0 5px 5px #999;
-	-webkit-box-sadow: 0 5px 5px #999;
-	box-shadow: 0 5px 5px #999;
+	background-color: rgba(27, 25, 22, 0.9);
+	border: 1px solid rgba(27, 25, 22, 0.9);
+
+	border-radius: 5px;
 }
 
 #pages-bar p {
@@ -32,12 +34,9 @@ span#current-page {
 }
 
 #pages-bar input {
-	/*
-	background-color: #E0E0E0;
-	border: 1px solid #D1D1D1;
-	*/
 	background-color: transparent;
-	border: 1px solid transparent;
+	border-color: transparent;
+	color: rgb(255, 255, 255);
 	height: 30px;
 	width: 150px;
 	display: block;
@@ -45,6 +44,5 @@ span#current-page {
 }
 
 #pages-bar input:hover {
-	/*background-color: #F0F0F0;*/
-	border: 1px solid #D1D1D1;
+	border: 1px solid rgb(255, 255, 255);
 }

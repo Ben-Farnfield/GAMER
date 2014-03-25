@@ -1,0 +1,57 @@
+@CHARSET "UTF-8";
+#reg-cont {
+	margin: 60px auto;
+	padding: 20px;
+	width: 610px;
+}
+
+#reg-cont table{
+	margin: 0px auto 0px auto;
+	border-spacing: 0px 5px;
+}
+
+td.input {
+	text-align: center;
+	width: 200px;
+}
+
+td.input-title {
+	text-align: right;
+	width: 200px;
+}
+
+td.error-msg {
+	color: #B20000;
+	line-height: 0px;
+	font-size: 10pt;
+	font-style: italic;
+	text-align: left;
+	width: 200px;
+}
+
+#reg-cont input {
+	border: 1px solid #D1D1D1;
+	height: 23px;
+}
+
+#reg-cont p {
+	text-align: center;
+}
+
+#reg-cont h2 {
+	line-height: 0px;
+	margin-bottom: 40px;
+	text-align: center;
+}
+
+#reg-cont a {
+	color: #0087EC;
+}
+
+input#submit-button {
+	background-color: #E0E0E0;
+	height: 30px;
+	width: 80px;
+	display: block;
+	margin: 30px auto 20px auto;
+}

@@ -1,15 +1,15 @@
 @CHARSET "UTF-8";
 
 #nav {
-	background-color: #E0E0E0;
-	border: 1px solid #D1D1D1;
-	height: 40px;
+	background-color: #1B1916;
+	border: 1px solid #1B1916;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	
+	height: 42px;
 	margin: 0px auto;
 	overflow: auto;
 	width: 960px;
-	-moz-box-shadow: 0 0 5px #999;
-	-webkit-box-sadow: 0 0 5px #999;
-	box-shadow: 0 0 5px #999;
 }
 
 #nav ul {
@@ -21,18 +21,22 @@
 }
 
 #nav a {
-	color: #666;
+	color: #ffffff; 
 	display: inline-block;
 	font-size: 18pt;
 	font-weight: bold;
 	line-height: 0px;
-	padding: 2% 7.9%;
+	padding: 18px 7.8%;
 }
 
 #nav a:hover {
 	border-bottom-style: solid;
-	border-color: #D1D1D1;
+	border-color: #59524B;
 	border-width: 4px;
+}
+
+span.status-info {
+	font-size: 12pt;
 }
 
 body.home a#home, 

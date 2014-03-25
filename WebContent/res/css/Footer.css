@@ -1,15 +1,13 @@
 @CHARSET "UTF-8";
 
 #footer {
-	background-color: #E0E0E0;
-	border:1px solid #D1D1D1;
-	margin: 0px auto;
+	background-color: rgba(27, 25, 22, 0.95);
+	border:1px solid rgba(27, 25, 22, 0.95);
+	margin: 0px auto 10px auto;
 	overflow: auto;
 	padding: 5px;
 	width: 950px;
 	height: 100px;
-
-	-moz-box-shadow: 0 5px 5px #999;
-	-webkit-box-sadow: 0 5px 5px #999;
-	box-shadow: 0 5px 5px #999;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
 }

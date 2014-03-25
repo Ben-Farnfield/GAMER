@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <c:if test="${empty pageOfProducts}">
-	<jsp:forward page="/shop?action=games"/>
+	<jsp:forward page="/shop?action=toys"/>
 </c:if>
 <!DOCTYPE html>
 <html>
@@ -19,7 +19,7 @@
 		<link rel="stylesheet" type="text/css" href="/GAMER/res/css/PagesBar.css">
 		<script src="/GAMER/res/js/lib/jquery-1.11.0.js"></script>
 	</head>
-	<body class="games">
+	<body class="toys">
 		<jsp:include page="/res/template/TopBar.jsp" flush="true"/>
 		<jsp:include page="/res/template/Header.jsp" flush="true"/>
 		<jsp:include page="/res/template/Nav.jsp" flush="true"/>
