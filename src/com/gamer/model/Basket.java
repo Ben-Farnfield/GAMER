@@ -1,56 +1,49 @@
 package com.gamer.model;
 
-import java.io.Serializable;
-import java.util.HashMap;
 
-public class Basket implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
-	// <product ID, number of product added>
-	private HashMap<Integer, Integer> itemsInBasket = new HashMap<>();
-	private int numItemsInBasket = 0;
-	
-	public Basket() {
-		super();
-	}
+public interface Basket {
 
-	public void addToBasket(int productId) {
-		if (itemsInBasket.containsKey(productId)) {
-			itemsInBasket.put(productId, itemsInBasket.get(productId) + 1);
-		} else {
-			itemsInBasket.put(productId, 1);
-		}
-		numItemsInBasket++;
-	}
+	/**
+	 * 
+	 * @param productId
+	 * @return returns false if no stock available.
+	 */
+	public boolean addOneToBasket(int productId);
 	
-	public void removeFromBasket(int productId) {
-		if (itemsInBasket.containsKey(productId)) {
-			if (itemsInBasket.get(productId) > 1) {
-				itemsInBasket.put(productId, itemsInBasket.get(productId) - 1);
-			} else {
-				itemsInBasket.remove(productId);
-			}
-			numItemsInBasket--;
-		}
-	}
+	/**
+	 * 
+	 * @param productId
+	 */
+	public void removeOneFromBasket(int productId);
 	
-	public void deleteFromBasket(int productId) {
-		if (itemsInBasket.containsKey(productId)) {
-			int numItems = itemsInBasket.get(productId);
-			itemsInBasket.remove(productId);
-			numItemsInBasket -= numItems;
-		}
-	}
+	/**
+	 * 
+	 * @param productId
+	 */
+	public void removeAllFromBasket(int productId);
 	
-	public HashMap<Integer, Integer> getItemsInBasket() {
-		return itemsInBasket;
-	}
+	/**
+	 * 
+	 * @return
+	 */
+	public ProductInBasket[] getAllProductsInBasket();
 	
-	public int getNumItemsInBasket() {
-		return numItemsInBasket;
-	}
+	/**
+	 * 
+	 * @return
+	 */
+	public int getTotalNumProductsInBasket();
 	
-	public boolean isInBasket(int productId) {
-		return itemsInBasket.containsKey(productId);
-	}
+	/**
+	 * 
+	 * @return
+	 */
+	public double getTotalCostOfBasket();
+	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public boolean isInBasket(int id);
 }

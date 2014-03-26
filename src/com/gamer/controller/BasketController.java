@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.gamer.model.Basket;
-import com.gamer.model.BasketOfProducts;
+import com.gamer.model.BasketImpl;
 
 /**
  * 
@@ -47,42 +47,41 @@ public class BasketController extends HttpServlet {
 		
 		Basket basket = (Basket)session.getAttribute("basket");
 		if (basket == null) {
-			basket = new Basket();
+			basket = new BasketImpl();
 			session.setAttribute("basket", basket);
 		}
 		
 		switch (action) {
 		case "basket":
-			BasketOfProducts basketOfProducts = new BasketOfProducts();
-			basketOfProducts.setItemsInBasket(basket.getItemsInBasket());
-			session.setAttribute("basketOfProducts", basketOfProducts);
+			session.setAttribute(
+					"allProductsInBasket", basket.getAllProductsInBasket());
 			getServletContext().getRequestDispatcher("/Basket.jsp").forward(req, res);
 			break;
 		
 		case "add_to_basket":
 			if (id != null) {
-				basket.addToBasket(Integer.parseInt(id));
+				basket.addOneToBasket(Integer.parseInt(id));
 				res.setContentType("text/plain");
 				res.setCharacterEncoding("UTF-8");
-				res.getWriter().print(basket.getNumItemsInBasket());	
+				res.getWriter().print(basket.getTotalNumProductsInBasket());	
 			}
 			break;
 
 		case "rem_from_basket":
 			if (id != null) {
-				basket.removeFromBasket(Integer.parseInt(id));
+				basket.removeOneFromBasket(Integer.parseInt(id));
 				res.setContentType("text/plain");
 				res.setCharacterEncoding("UTF-8");
-				res.getWriter().print(basket.getNumItemsInBasket());	
+				res.getWriter().print(basket.getTotalNumProductsInBasket());	
 			}
 			break;
 			
 		case "del_from_basket":
 			if (id != null) {
-				basket.deleteFromBasket(Integer.parseInt(id));
+				basket.removeAllFromBasket(Integer.parseInt(id));
 				res.setContentType("text/plain");
 				res.setCharacterEncoding("UTF-8");
-				res.getWriter().print(basket.getNumItemsInBasket());	
+				res.getWriter().print(basket.getTotalNumProductsInBasket());	
 			}
 			break;
 		}

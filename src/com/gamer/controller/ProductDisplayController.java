@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import com.gamer.dao.DAOFactory;
 import com.gamer.dao.ProductDAO;
-import com.gamer.dao.ProductDAOImpl;
 import com.gamer.model.PageOfProducts;
 import com.gamer.model.Product;
 

@@ -23,7 +23,7 @@
 				<span class="status-info" id="basket-num">
 					<c:choose>
 						<c:when test="${not empty basket}">
-							<c:out value="( ${basket.numItemsInBasket} )"></c:out>
+							<c:out value="( ${basket.totalNumProductsInBasket} )"></c:out>
 						</c:when>
 						<c:otherwise>
 							<c:out value="( 0 )"></c:out>

@@ -42,15 +42,7 @@ public class ProductDAOImpl implements ProductDAO {
 			PreparedStatement statement = con.prepareStatement(sql);
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
-				Product product = new Product();
-				product.setName(resultSet.getString("product_name"));
-				product.setPrice(resultSet.getDouble("price"));
-				product.setDescription(resultSet.getString("description"));
-				product.setGenre(resultSet.getString("genre"));
-				product.setPictureURI(resultSet.getString("pic_url"));
-				product.setQuantity(resultSet.getInt("stock"));
-				product.setId(resultSet.getInt("productid"));
-				products.add(product);
+				products.add(buildProduct(resultSet));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -61,23 +53,17 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 	
 	public Product findProduct(int id) {
-		Product product = new Product();
-		
+				
 		String sql = "SELECT * FROM product WHERE productid='" + id + "'";
 		
+		Product product = null;
 		Connection con = null;
 		try {
 			con = getConnection();
 			PreparedStatement statement = con.prepareStatement(sql);
 			ResultSet resultSet = statement.executeQuery();
 			resultSet.next();
-			product.setName(resultSet.getString("product_name"));
-			product.setPrice(resultSet.getDouble("price"));
-			product.setDescription(resultSet.getString("description"));
-			product.setGenre(resultSet.getString("genre"));
-			product.setPictureURI(resultSet.getString("pic_url"));
-			product.setQuantity(resultSet.getInt("stock"));
-			product.setId(resultSet.getInt("productid"));
+			product = buildProduct(resultSet);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -97,15 +83,7 @@ public class ProductDAOImpl implements ProductDAO {
 			PreparedStatement statement = con.prepareStatement(sql);
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
-				Product product = new Product();
-				product.setName(resultSet.getString("product_name"));
-				product.setPrice(resultSet.getDouble("price"));
-				product.setDescription(resultSet.getString("description"));
-				product.setGenre(resultSet.getString("genre"));
-				product.setPictureURI(resultSet.getString("pic_url"));
-				product.setQuantity(resultSet.getInt("stock"));
-				product.setId(resultSet.getInt("productid"));
-				products.add(product);
+				products.add(buildProduct(resultSet));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -121,5 +99,18 @@ public class ProductDAOImpl implements ProductDAO {
 	
 	public ArrayList<Product> searchByKeywords(String[] keywords) {
 		return new ArrayList<>();
+	}
+	
+	private Product buildProduct(ResultSet resultSet) throws SQLException {
+		Product product = new Product();
+		product.setName(resultSet.getString("product_name"));
+		product.setPrice(resultSet.getDouble("price"));
+		product.setDescription(resultSet.getString("description"));
+		product.setGenre(resultSet.getString("genre"));
+		product.setPictureURI(resultSet.getString("pic_url"));
+		product.setStock(resultSet.getInt("stock"));
+		product.setId(resultSet.getInt("productid"));
+		product.setType(resultSet.getString("product_type"));
+		return product;
 	}
 }

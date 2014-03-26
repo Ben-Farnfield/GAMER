@@ -2,16 +2,28 @@ package com.gamer.model;
 
 public class ProductInBasket {
 
-	private int id;
+	private Product product;
 	private int quantity;
-	private int stock;
 	
-	public int getId() {return id;}
-	public void setId(int id) {this.id = id;}
+	public Product getProduct() { return product; }
+	public boolean setProduct(Product product) {
+		if (product.getStock() == 0) return false;
+		this.product = product;
+		quantity = 1;
+		return true;
+	}
 	
-	public int getQuantity() {return quantity;}
-	public void setQuantity(int quantity) {this.quantity = quantity;}
+	public int getQuantity() { return quantity; }
 	
-	public int getStock() {return stock;}
-	public void setStock(int stock) {this.stock = stock;}
+	public boolean addOneProduct() { 
+		if (quantity < product.getStock()) {
+			quantity++;
+			return true;
+		}
+		return false;
+	}
+	
+	public void removeOneProduct() { 
+		if (quantity > 0) quantity--;
+	}
 }

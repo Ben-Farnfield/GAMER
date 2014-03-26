@@ -23,7 +23,7 @@
 		<div id="content">
 			<div id="basket-content">
 				<c:choose>
-					<c:when test="${basket.numItemsInBasket == 0}">
+					<c:when test="${basket.totalNumProductsInBasket == 0}">
 						<p id="no-items">There are currently no items in your basket</p>
 					</c:when>
 					<c:otherwise>
@@ -44,32 +44,32 @@
 									<td class="bask-spacer"> </td>
 									<td colspan="4"></td>
 									<td id="bask-total-lab">total:</td>
-									<td id="bask-total-fig" class="bask-price">${basketOfProducts.totalCostOfBasket}</td>
+									<td id="bask-total-fig" class="bask-price">${basket.totalCostOfBasket}</td>
 								</tr>
 							</tfoot>
 							<tbody>
-							<c:forEach var="product" items="${basketOfProducts.productsInBasket}">
-								<tr id="row-${product.key.id}">
+							<c:forEach var="product" items="${basket.allProductsInBasket}">
+								<tr id="row-${product.product.id}">
 									<td class="bask-item">
-										<c:out value="${product.key.name}"/>
-										<input id="price-${product.key.id}" type="hidden" value="${product.key.price}"/>
+										<c:out value="${product.product.name}"/>
+										<input id="price-${product.product.id}" type="hidden" value="${product.product.price}"/>
 									</td>
 									<td class="bask-spacer"> </td>
 									<td>
-										<input class="quan-min" type="submit" value="-" name="${product.key.id}"/>
+										<input class="quan-min" type="submit" value="-" name="${product.product.id}"/>
 									</td>
 									<td>
-										<input id="${product.key.id}" class="quan" type="text" name="quantity" value="${product.value}" readonly/>
+										<input id="${product.product.id}" class="quan" type="text" name="quantity" value="${product.quantity}" readonly/>
 									</td>
 									<td>
-										<input class="quan-plus" type="submit" value="+" name="${product.key.id}"/>
+										<input class="quan-plus" type="submit" value="+" name="${product.product.id}"/>
 									</td>
 									<td>
-										<input class="rem-item" type="submit" value="remove item" name="${product.key.id}"/>
+										<input class="rem-item" type="submit" value="remove item" name="${product.product.id}"/>
 									</td>
 									<td> </td>
-									<td id="bask-price-${product.key.id}" class="bask-price">
-										<c:out value="${product.key.price * product.value}"/>
+									<td id="bask-price-${product.product.id}" class="bask-price">
+										<c:out value="${product.product.price * product.quantity}"/>
 									</td>
 								</tr>
 							</c:forEach>
