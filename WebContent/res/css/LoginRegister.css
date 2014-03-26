@@ -1,32 +1,28 @@
 @CHARSET "UTF-8";
-#reg-cont {
-	margin: 60px auto;
+div#reg-cont {
+	margin: 10px;
 	padding: 20px;
-	width: 610px;
+	/*width: 610px;*/
+	background-color: rgba(27, 25, 22, 0.9);
+	border: 1px solid rgba(27, 25, 22, 0.9);
+	border-radius: 5px;
 }
 
 #reg-cont table{
 	margin: 0px auto 0px auto;
+	display: block;
 	border-spacing: 0px 5px;
 }
 
 td.input {
 	text-align: center;
-	width: 200px;
+	width: 300px;
 }
 
 td.input-title {
 	text-align: right;
 	width: 200px;
-}
-
-td.error-msg {
-	color: #B20000;
-	line-height: 0px;
-	font-size: 10pt;
-	font-style: italic;
-	text-align: left;
-	width: 200px;
+	padding: 5px;
 }
 
 #reg-cont input {
@@ -48,10 +44,30 @@ td.error-msg {
 	color: #0087EC;
 }
 
-input#submit-button {
-	background-color: #E0E0E0;
+input#submit {
 	height: 30px;
-	width: 80px;
+	width: 230px;
+	background-color: transparent;
+	border: 1px solid #007AD4;
+	color: rgb(255, 255, 255);
+	margin: 20px auto 0px auto;
 	display: block;
-	margin: 30px auto 20px auto;
+}
+
+input#submit:hover {
+	border: 1px solid white;
+}
+
+#reg-cont input[type="text"], #reg-cont input[type="password"] {
+	background-color: rgba(255, 255, 255, 0.2);
+	border-style: none;
+	color: white;
+	border-radius: 3px;
+	width: 250px;
+}
+
+fieldset.reg-log {
+	border-radius: 5px;
+	margin: 10px 80px;
+	border-color: rgba(255, 255, 255, 0.2);
 }

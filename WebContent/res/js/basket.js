@@ -4,10 +4,7 @@ $(document).ready(function(){
 		$.get('/GAMER/shop?action=add_to_basket&id=' + id, function(respTxt) {
         	$('img#add-basket-' + id).attr({'src':'/GAMER/res/img/misc/AddedToBasket.png', 'style':'display: none;'});
         	$('img#add-basket-' + id).fadeIn(300, function(){
-        		$('span#basket-num').fadeToggle(200, function(){
-        			$('span#basket-num').text('( ' + respTxt + ' )');
-        			$('span#basket-num').fadeToggle(200);
-        		});
+        		updateNumProdInBasket(respTxt);
         	});
 		});
 	});
@@ -17,18 +14,11 @@ $(document).ready(function(){
 	$('.quan-plus').click(function(){
 		var id = $(this).attr('name');
         $.get('/GAMER/shop?action=add_to_basket&id=' + id, function(respTxt) {
-        	// update basket val
-        	$('span#basket-num').text('( ' + respTxt + ' )');
-        	// update quantity val
-        	var numProd = $('#' + id).val();
-        	$('#' + id).val(parseInt(numProd, 10) + 1);
-        	// update line price
-        	var itemPrice = parseInt($('#price-' + id).val(), 10);
-        	var curPrice = parseInt($('#bask-price-' + id).text(), 10);
-        	$('#bask-price-' + id).text(curPrice + itemPrice);
-        	// update total price
-        	var curTotal = parseInt($('#bask-total-fig').text(), 10);
-        	$('#bask-total-fig').text(curTotal + itemPrice);
+        	
+        	updateNumProdInBasket(respTxt);
+        	incQuantity(id);
+        	incLinePrice(id);
+        	incTotal(id);
         });
 	});
 });
@@ -37,19 +27,13 @@ $(document).ready(function(){
 	$('.quan-min').click(function(){
 		var id = $(this).attr('name');
         $.get('/GAMER/shop?action=rem_from_basket&id=' + id, function(respTxt) {
-        	// update basket val
-        	$('span#basket-num').text('( ' + respTxt + ' )');
-        	// update quantity val
-        	var numProd = $('#' + id).val();
-        	if (numProd != 0) {
-        		$('#' + id).val(parseInt(numProd, 10) - 1);
-	        	// update line price
-	        	var itemPrice = parseInt($('#price-' + id).val(), 10);
-	        	var curPrice = parseInt($('#bask-price-' + id).text(), 10);
-	        	$('#bask-price-' + id).text(curPrice - itemPrice);
-	        	// update total price
-	        	var curTotal = parseInt($('#bask-total-fig').text(), 10);
-	        	$('#bask-total-fig').text(curTotal - itemPrice);
+        	
+        	if (getQuantity(id) != 0) {
+        		
+        		updateNumProdInBasket(respTxt);
+        		decQuantity(id);
+        		decLinePrice(id);
+        		decTotal(id);
         	}
         });
 	});
@@ -59,25 +43,77 @@ $(document).ready(function(){
 	$('.rem-item').click(function(){
 		var id = $(this).attr('name');
 		$.get('/GAMER/shop?action=del_from_basket&id=' + id, function(respTxt) {
-        	// update basket val
-        	$('span#basket-num').text('( ' + respTxt + ' )');
-        	// remove row
-        	if (respTxt > 0) {
-        		$('#row-' + id).fadeOut(400, function(){
+        	
+        	if (respTxt > 0) { // remove row
+        		$('#row-' + id).fadeOut(500, function(){
+        			decTotalAfterDel(id);
         			$('#row-' + id).remove();
+        			updateNumProdInBasket(respTxt);
                 });
-	        	//update total price
-	        	var curPrice = parseInt($('#bask-price-' + id).text(), 10);
-        		var curTotal = parseInt($('#bask-total-fig').text(), 10);
-        		$('#bask-total-fig').text(curTotal - curPrice);
-        	} else {
-        		$('#bask-tab').fadeOut(400);
-        		$('#pur-button').fadeOut(400, function(){
+        	} else { // remove basket
+        		$('#bask-tab').fadeOut(500);
+        		$('#pur-button').fadeOut(500, function(){
         			$('#bask-tab').remove();
 	        		$('#pur-button').remove();
 	        		$('#basket-content').html('<p id="no-items">There are currently no items in your basket</p>');
+	        		updateNumProdInBasket(respTxt);
         		});
         	}
 		});
 	});
 });
+
+/* NUM ITEMS IN BASKET ------------------------------------------------------*/
+function updateNumProdInBasket(respTxt) {
+	$('span#basket-num').text('( ' + respTxt + ' )');
+}
+
+/* QUANTITY -----------------------------------------------------------------*/
+function incQuantity(id) {
+	$('#' + id).val(getQuantity(id) + 1);
+}
+
+function decQuantity(id) {
+	$('#' + id).val(getQuantity(id) - 1);
+}
+
+function getQuantity(id) {
+	return parseInt($('#' + id).val(), 10);
+}
+
+/* LINE PRICE ---------------------------------------------------------------*/
+function incLinePrice(id) {
+	var price = getPrices(id);
+	$('#bask-price-' + id).text(price['curPrice'] + price['itemPrice']);
+}
+
+function decLinePrice(id) {
+	var price = getPrices(id);
+	$('#bask-price-' + id).text(price['curPrice'] - price['itemPrice']);
+}
+
+/* TOTAL PRICE --------------------------------------------------------------*/
+
+function incTotal(id) {
+	var price = getPrices(id);
+	$('#bask-total-fig').text(price['curTotal'] + price['itemPrice']);
+}
+
+function decTotal(id) {
+	var price = getPrices(id);
+	$('#bask-total-fig').text(price['curTotal'] - price['itemPrice']);
+}
+
+function decTotalAfterDel(id) {
+	var price = getPrices(id);
+	$('#bask-total-fig').text(price['curTotal'] - price['curPrice']);
+}
+
+/* PRICES -------------------------------------------------------------------*/
+function getPrices(id) {
+	return {
+		'itemPrice' : parseInt($('#price-' + id).val(), 10),
+		'curPrice' : parseInt($('#bask-price-' + id).text(), 10),
+		'curTotal' : parseInt($('#bask-total-fig').text(), 10)
+	};
+}

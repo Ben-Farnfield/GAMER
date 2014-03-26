@@ -31,15 +31,13 @@
 						</tr>
 						<tr>
 							<td class="input-title">Password:</td>
-							<td class="input"><input id="pass" type="text" maxlength="32" name="password"></td>
+							<td class="input"><input id="pass" type="password" maxlength="32" name="password"></td>
 							<td id="error-pass" class="error-msg"></td>
 						</tr>
-						<tr>
-							<td colspan="3" align="center"><input id="submit-button" type="submit" value="Submit" /></td>
-						</tr>
 					</table>
+					<input id="submit" type="submit" value="Submit" />
 				</form>
-				<p>If you're not registered then go ahead and <a href="register.html">register</a> now.</p>
+				<p>If you're not registered then go ahead and <a href="/GAMER/shop?action=register">register</a> now.</p>
 			</div>
 		</div> <!-- END content -->
 		<jsp:include page="/res/template/Footer.jsp" flush="true"/>
