@@ -1,4 +1,4 @@
-package com.gamer.beans;
+package com.gamer.model;
 
 import java.util.List;
 

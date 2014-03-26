@@ -1,4 +1,4 @@
-package com.gamer;
+package com.gamer.controller;
 
 import java.io.IOException;
 
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.gamer.beans.Basket;
-import com.gamer.beans.BasketOfProducts;
+import com.gamer.model.Basket;
+import com.gamer.model.BasketOfProducts;
 
 /**
  * 
  */
 @WebServlet("/basketServlet")
-public class BasketServlet extends HttpServlet {
+public class BasketController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BasketServlet() { super(); }
+    public BasketController() { super(); }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest req, HttpServletResponse res)

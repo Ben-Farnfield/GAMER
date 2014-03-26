@@ -1,9 +1,10 @@
-package com.gamer.beans;
+package com.gamer.model;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.gamer.data.dao.ProductDAO;
+import com.gamer.dao.DAOFactory;
+import com.gamer.dao.ProductDAO;
 
 public class BasketOfProducts {
 
@@ -20,9 +21,9 @@ public class BasketOfProducts {
 	}
 	
 	public void setItemsInBasket(HashMap<Integer, Integer> itemsInBasket) {
-		ProductDAO dao = new ProductDAO();
+		ProductDAO dao = DAOFactory.getInstance().getProductDAO();
 		for (Map.Entry<Integer, Integer> item : itemsInBasket.entrySet()) {
-			Product product = dao.getProduct(item.getKey());
+			Product product = dao.findProduct(item.getKey());
 			productsInBasket.put(product, item.getValue());
 		}
 	}

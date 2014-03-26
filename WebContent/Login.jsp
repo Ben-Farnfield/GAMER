@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.gamer.beans.Product" %>
+<%@ page import="com.gamer.model.Product" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html>
@@ -21,20 +21,22 @@
 		<jsp:include page="/res/template/Nav.jsp" flush="true"/>
 		<div id="content">
 			<div id="reg-cont">
-				<h2>Login</h2>
-				<form method="post" onsubmit="">
-					<table>
-						<tr>
-							<td class="input-title">E-mail:</td>
-							<td class="input"><input id="email" type="text" maxlength="32" name="dob"></td>
-							<td id="error-email" class="error-msg"></td>
-						</tr>
-						<tr>
-							<td class="input-title">Password:</td>
-							<td class="input"><input id="pass" type="password" maxlength="32" name="password"></td>
-							<td id="error-pass" class="error-msg"></td>
-						</tr>
-					</table>
+				<form method="post">
+					<fieldset class="reg-log">
+						<legend>Login</legend>
+						<table>
+							<tr>
+								<td class="input-title">E-mail:</td>
+								<td class="input"><input id="email" type="text" maxlength="32" name="dob"></td>
+								<td id="error-email" class="error-msg"></td>
+							</tr>
+							<tr>
+								<td class="input-title">Password:</td>
+								<td class="input"><input id="pass" type="password" maxlength="32" name="password"></td>
+								<td id="error-pass" class="error-msg"></td>
+							</tr>
+						</table>
+					</fieldset>
 					<input id="submit" type="submit" value="Submit" />
 				</form>
 				<p>If you're not registered then go ahead and <a href="/GAMER/shop?action=register">register</a> now.</p>

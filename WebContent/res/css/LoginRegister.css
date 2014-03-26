@@ -2,7 +2,6 @@
 div#reg-cont {
 	margin: 10px;
 	padding: 20px;
-	/*width: 610px;*/
 	background-color: rgba(27, 25, 22, 0.9);
 	border: 1px solid rgba(27, 25, 22, 0.9);
 	border-radius: 5px;
@@ -21,7 +20,7 @@ td.input {
 
 td.input-title {
 	text-align: right;
-	width: 200px;
+	width: 195px;
 	padding: 5px;
 }
 
@@ -32,6 +31,7 @@ td.input-title {
 
 #reg-cont p {
 	text-align: center;
+	margin-top: 25px;
 }
 
 #reg-cont h2 {
@@ -50,7 +50,7 @@ input#submit {
 	background-color: transparent;
 	border: 1px solid #007AD4;
 	color: rgb(255, 255, 255);
-	margin: 20px auto 0px auto;
+	margin: 35px auto 0px auto;
 	display: block;
 }
 

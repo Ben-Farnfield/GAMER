@@ -1,4 +1,4 @@
-package com.gamer;
+package com.gamer.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,15 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.gamer.beans.PageOfProducts;
-import com.gamer.beans.Product;
-import com.gamer.data.dao.ProductDAO;
+import com.gamer.dao.DAOFactory;
+import com.gamer.dao.ProductDAO;
+import com.gamer.dao.ProductDAOImpl;
+import com.gamer.model.PageOfProducts;
+import com.gamer.model.Product;
 
 /**
  * 
  */
 @WebServlet("/productDisplay")
-public class ProductDisplayServlet extends HttpServlet {
+public class ProductDisplayController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private static final int NUM_PROD_PER_PAGE = 9; // TODO move into web.xml
@@ -32,7 +34,7 @@ public class ProductDisplayServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductDisplayServlet() { super(); }
+    public ProductDisplayController() { super(); }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest req, HttpServletResponse res)
@@ -65,8 +67,8 @@ public class ProductDisplayServlet extends HttpServlet {
 		switch (action) {
 		case GAMES:
 			if ((String)session.getAttribute("currentPage") != GAMES) {
-				ProductDAO dao = new ProductDAO();
-				session.setAttribute("products", dao.getGames());
+				ProductDAO dao = DAOFactory.getInstance().getProductDAO();
+				session.setAttribute("products", dao.findAllGames());
 				session.setAttribute("currentPage", GAMES);
 			}
 			
@@ -78,8 +80,8 @@ public class ProductDisplayServlet extends HttpServlet {
 
 		case TOYS:
 			if ((String)session.getAttribute("currentPage") != TOYS) {
-				ProductDAO dao = new ProductDAO();
-				session.setAttribute("products", dao.getToys());
+				ProductDAO dao = DAOFactory.getInstance().getProductDAO();
+				session.setAttribute("products", dao.findAllToys());
 				session.setAttribute("currentPage", TOYS);
 			}
 			
@@ -91,8 +93,8 @@ public class ProductDisplayServlet extends HttpServlet {
 			
 		default:
 			if ((String)session.getAttribute("currentPage") != HOME) {
-				ProductDAO dao = new ProductDAO();
-				session.setAttribute("products", dao.getProducts());
+				ProductDAO dao = DAOFactory.getInstance().getProductDAO();
+				session.setAttribute("products", dao.findAllProducts());
 				session.setAttribute("currentPage", HOME);
 			}
 			

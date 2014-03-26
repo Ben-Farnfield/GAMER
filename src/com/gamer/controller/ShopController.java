@@ -1,4 +1,4 @@
-package com.gamer;
+package com.gamer.controller;
 
 import java.io.IOException;
 
@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
  * 
  */
 @WebServlet(value="/shop")
-public class ControlServlet extends HttpServlet {
+public class ShopController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ControlServlet() { super(); }
+    public ShopController() { super(); }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest req, HttpServletResponse res)
