@@ -43,7 +43,7 @@ th.bask-item {
 	text-align: center;
 }
 
-td.bask-price {
+td.line-price {
 	border: 2px none #59524B;
 	border-left-style: solid;
 	font-size: 16pt;
@@ -52,7 +52,7 @@ td.bask-price {
 	text-align: center;
 }
 
-th.bask-price {
+th.line-price {
 	text-align: center;
 }
 

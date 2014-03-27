@@ -1,7 +1,10 @@
 package com.gamer.model;
 
-public class ProductInBasket {
+import java.io.Serializable;
 
+public class ProductInBasket implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private Product product;
 	private int quantity;
 	
@@ -14,6 +17,11 @@ public class ProductInBasket {
 	}
 	
 	public int getQuantity() { return quantity; }
+	public void setQuantity(int quantity) { this.quantity = quantity; }
+	
+	public double getLinePrice() {
+		return product.getPrice() * quantity;
+	}
 	
 	public boolean addOneProduct() { 
 		if (quantity < product.getStock()) {

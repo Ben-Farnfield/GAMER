@@ -46,6 +46,10 @@ public class BasketImpl implements Basket {
 		}
 	}
 	
+	public ProductInBasket getProductInBasket(int productId) {
+		return basket.get(productId);
+	}
+	
 	public ProductInBasket[] getAllProductsInBasket() {
 		return basket.values().toArray(new ProductInBasket[0]);
 	}

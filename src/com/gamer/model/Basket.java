@@ -24,6 +24,13 @@ public interface Basket {
 	
 	/**
 	 * 
+	 * @param productId
+	 * @return
+	 */
+	public ProductInBasket getProductInBasket(int productId);
+	
+	/**
+	 * 
 	 * @return
 	 */
 	public ProductInBasket[] getAllProductsInBasket();

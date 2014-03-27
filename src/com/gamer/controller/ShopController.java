@@ -50,9 +50,6 @@ public class ShopController extends HttpServlet {
 			break;
 			
 		case "basket":
-		case "add_to_basket":
-		case "rem_from_basket":
-		case "del_from_basket":
 			url += "basketServlet";
 			break;
 			

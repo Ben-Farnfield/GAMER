@@ -35,7 +35,7 @@
 									<th class="heading" colspan="3">Quantity</th>
 									<th> </th>
 									<th> </th>
-									<th class="bask-price heading">Price ( £ )</th>
+									<th class="line-price heading">Price ( £ )</th>
 								</tr>
 							</thead>
 							<tfoot>
@@ -44,7 +44,7 @@
 									<td class="bask-spacer"> </td>
 									<td colspan="4"></td>
 									<td id="bask-total-lab">total:</td>
-									<td id="bask-total-fig" class="bask-price">${basket.totalCostOfBasket}</td>
+									<td id="bask-total-fig" class="line-price">${basket.totalCostOfBasket}</td>
 								</tr>
 							</tfoot>
 							<tbody>
@@ -52,14 +52,13 @@
 								<tr id="row-${product.product.id}">
 									<td class="bask-item">
 										<c:out value="${product.product.name}"/>
-										<input id="price-${product.product.id}" type="hidden" value="${product.product.price}"/>
 									</td>
 									<td class="bask-spacer"> </td>
 									<td>
 										<input class="quan-min" type="submit" value="-" name="${product.product.id}"/>
 									</td>
 									<td>
-										<input id="${product.product.id}" class="quan" type="text" name="quantity" value="${product.quantity}" readonly/>
+										<input id="quan-${product.product.id}" class="quan" type="text" name="quantity" value="${product.quantity}" readonly/>
 									</td>
 									<td>
 										<input class="quan-plus" type="submit" value="+" name="${product.product.id}"/>
@@ -68,8 +67,8 @@
 										<input class="rem-item" type="submit" value="remove item" name="${product.product.id}"/>
 									</td>
 									<td> </td>
-									<td id="bask-price-${product.product.id}" class="bask-price">
-										<c:out value="${product.product.price * product.quantity}"/>
+									<td id="line-price-${product.product.id}" class="line-price">
+										<c:out value="${product.linePrice}"/>
 									</td>
 								</tr>
 							</c:forEach>

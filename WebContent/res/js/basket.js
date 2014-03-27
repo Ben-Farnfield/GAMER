@@ -1,10 +1,10 @@
 $(document).ready(function(){
 	$('.basket_button').click(function(){
 		var id = $(this).attr('id');
-		$.get('/GAMER/shop?action=add_to_basket&id=' + id, function(respTxt) {
+		$.get('/GAMER/basketServlet?action=add_to_basket&id=' + id, function(respJson) {
         	$('img#add-basket-' + id).attr({'src':'/GAMER/res/img/misc/AddedToBasket.png', 'style':'display: none;'});
         	$('img#add-basket-' + id).fadeIn(300, function(){
-        		updateNumProdInBasket(respTxt);
+        		setTotalNumProductsInBasket(respJson);
         	});
 		});
 	});
@@ -13,12 +13,11 @@ $(document).ready(function(){
 $(document).ready(function(){
 	$('.quan-plus').click(function(){
 		var id = $(this).attr('name');
-        $.get('/GAMER/shop?action=add_to_basket&id=' + id, function(respTxt) {
-        	
-        	updateNumProdInBasket(respTxt);
-        	incQuantity(id);
-        	incLinePrice(id);
-        	incTotal(id);
+        $.get('/GAMER/basketServlet?action=add_to_basket&id=' + id, function(respJson) {
+        	setTotalNumProductsInBasket(respJson);
+        	setQuantity(id, respJson);
+        	setLineCost(id, respJson);
+        	setTotalCostOfBasket(respJson);
         });
 	});
 });
@@ -26,29 +25,26 @@ $(document).ready(function(){
 $(document).ready(function(){
 	$('.quan-min').click(function(){
 		var id = $(this).attr('name');
-        $.get('/GAMER/shop?action=rem_from_basket&id=' + id, function(respTxt) {
-        	
-        	if (getQuantity(id) != 0) {
-        		
-        		updateNumProdInBasket(respTxt);
-        		decQuantity(id);
-        		decLinePrice(id);
-        		decTotal(id);
-        	}
+        $.get('/GAMER/basketServlet?action=rem_from_basket&id=' + id, function(respJson) {
+        	setTotalNumProductsInBasket(respJson);
+        	setQuantity(id, respJson);
+        	setLineCost(id, respJson);
+        	setTotalCostOfBasket(respJson);
         });
 	});
 });
 
+// TODO fix bug where all items are removed if all set to 0 quantity
 $(document).ready(function(){
 	$('.rem-item').click(function(){
 		var id = $(this).attr('name');
-		$.get('/GAMER/shop?action=del_from_basket&id=' + id, function(respTxt) {
+		$.get('/GAMER/basketServlet?action=del_from_basket&id=' + id, function(respJson) {
         	
-        	if (respTxt > 0) { // remove row
+        	if (respJson.totalNumProductsInBasket > 0) { // remove row
         		$('#row-' + id).fadeOut(500, function(){
-        			decTotalAfterDel(id);
+        			setTotalCostOfBasket(respJson);
         			$('#row-' + id).remove();
-        			updateNumProdInBasket(respTxt);
+        			setTotalNumProductsInBasket(respJson);
                 });
         	} else { // remove basket
         		$('#bask-tab').fadeOut(500);
@@ -56,64 +52,25 @@ $(document).ready(function(){
         			$('#bask-tab').remove();
 	        		$('#pur-button').remove();
 	        		$('#basket-content').html('<p id="no-items">There are currently no items in your basket</p>');
-	        		updateNumProdInBasket(respTxt);
+	        		setTotalNumProductsInBasket(respJson);
         		});
         	}
 		});
 	});
 });
 
-/* NUM ITEMS IN BASKET ------------------------------------------------------*/
-function updateNumProdInBasket(respTxt) {
-	$('span#basket-num').text('( ' + respTxt + ' )');
+function setTotalNumProductsInBasket(respJson) {
+	$('span#basket-num').text('( ' + respJson.totalNumProductsInBasket + ' )');
 }
 
-/* QUANTITY -----------------------------------------------------------------*/
-function incQuantity(id) {
-	$('#' + id).val(getQuantity(id) + 1);
+function setQuantity(id, respJson) {
+	$('#quan-' + id).val(respJson.quantity);
 }
 
-function decQuantity(id) {
-	$('#' + id).val(getQuantity(id) - 1);
+function setLineCost(id, respJson) {
+	$('#line-price-' + id).text(respJson.lineCost);
 }
 
-function getQuantity(id) {
-	return parseInt($('#' + id).val(), 10);
-}
-
-/* LINE PRICE ---------------------------------------------------------------*/
-function incLinePrice(id) {
-	var price = getPrices(id);
-	$('#bask-price-' + id).text(price['curPrice'] + price['itemPrice']);
-}
-
-function decLinePrice(id) {
-	var price = getPrices(id);
-	$('#bask-price-' + id).text(price['curPrice'] - price['itemPrice']);
-}
-
-/* TOTAL PRICE --------------------------------------------------------------*/
-
-function incTotal(id) {
-	var price = getPrices(id);
-	$('#bask-total-fig').text(price['curTotal'] + price['itemPrice']);
-}
-
-function decTotal(id) {
-	var price = getPrices(id);
-	$('#bask-total-fig').text(price['curTotal'] - price['itemPrice']);
-}
-
-function decTotalAfterDel(id) {
-	var price = getPrices(id);
-	$('#bask-total-fig').text(price['curTotal'] - price['curPrice']);
-}
-
-/* PRICES -------------------------------------------------------------------*/
-function getPrices(id) {
-	return {
-		'itemPrice' : parseInt($('#price-' + id).val(), 10),
-		'curPrice' : parseInt($('#bask-price-' + id).text(), 10),
-		'curTotal' : parseInt($('#bask-total-fig').text(), 10)
-	};
+function setTotalCostOfBasket(respJson) {
+	$('#bask-total-fig').text(respJson.totalCostOfBasket);
 }

@@ -9,7 +9,7 @@ public class DAOFactory {
 	
 	// TODO move out into properties file
 	private static final String USER_NAME = "postgres";
-	private static final String PASSWORD = "";
+	private static final String PASSWORD = "C4tf1sh10";
 	private static final String URL = "jdbc:postgresql://localhost/postgres";
 	
 	private static final Properties PROP = new Properties();
