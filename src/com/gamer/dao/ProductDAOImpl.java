@@ -31,6 +31,7 @@ public class ProductDAOImpl implements ProductDAO {
 		} catch (SQLException e) {}
 	}
 
+	@Override
 	public ArrayList<Product> findAllProducts() {
 		ArrayList<Product> products = new ArrayList<>();
 		
@@ -52,6 +53,7 @@ public class ProductDAOImpl implements ProductDAO {
 		return products;
 	}
 	
+	@Override
 	public Product findProduct(int id) {
 				
 		String sql = "SELECT * FROM product WHERE productid='" + id + "'";
@@ -72,6 +74,7 @@ public class ProductDAOImpl implements ProductDAO {
 		return product;
 	}
 	
+	@Override
 	public ArrayList<Product> findAllGames() {
 		ArrayList<Product> products = new ArrayList<>();
 		
@@ -93,10 +96,12 @@ public class ProductDAOImpl implements ProductDAO {
 		return products;
 	}
 	
+	@Override
 	public ArrayList<Product> findAllToys() {		
 		return new ArrayList<>();
 	}
 	
+	@Override
 	public ArrayList<Product> searchByKeywords(String[] keywords) {
 		return new ArrayList<>();
 	}

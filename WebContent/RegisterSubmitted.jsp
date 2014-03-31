@@ -31,41 +31,42 @@
 								<td class="input"><input type="text" maxlength="32" name="forename" value="${registerViewHelper.forename}"></td>
 								<td class="input-spacer"></td>
 							</tr>
-							<tr id="forename-error" class="error" 
-								<c:if test="${registerViewHelper.validForename}">style="display:none;"</c:if>
-							>
+							<tr id="forename-error" class="error" <c:if test="${registerViewHelper.validForename}">style="display:none;"</c:if>>
 								<td colspan="3">${registerViewHelper.forenameErrorMsg}</td>
 							</tr>
 							<tr>
 								<td class="input-title">Surname:</td>
-								<td class="input"><input type="text" maxlength="32" name="surname"></td>
+								<td class="input"><input type="text" maxlength="32" name="surname" value="${registerViewHelper.surname}"></td>
 								<td class="input-spacer"></td>
 							</tr>
-							<tr id="surname-error" class="error">
+							<tr id="surname-error" class="error" <c:if test="${registerViewHelper.validSurname}">style="display:none;"</c:if>>
 								<td colspan="3">${registerViewHelper.surnameErrorMsg}</td>
 							</tr>
 							<tr>
 								<td class="input-title">E-mail:</td>
-								<td class="input"><input id="email" type="text" maxlength="32" name="email"></td>
+								<td class="input"><input id="email" type="text" maxlength="32" name="email" value="${registerViewHelper.email}"></td>
 								<td class="input-spacer"></td>
 							</tr>
-							<tr id="email-error" class="error">
+							<tr id="email-error" class="error" <c:if test="${registerViewHelper.validEmail}">style="display:none;"</c:if>>
 								<td colspan="3">${registerViewHelper.emailErrorMsg}</td>
+							</tr>
+							<tr id="email-prev-used-error" class="error" <c:if test="${! registerViewHelper.emailInDatabase}">style="display:none;"</c:if>>
+								<td colspan="3">${registerViewHelper.emailPrevUsedErrorMsg}</td>
 							</tr>
 							<tr>
 								<td class="input-title">Password:</td>
-								<td class="input"><input id="pass" type="password" maxlength="16" name="password"></td>
+								<td class="input"><input id="pass" type="password" maxlength="16" name="password" value="${registerViewHelper.password}"></td>
 								<td class="input-spacer"></td>
 							</tr>
-							<tr id="password-error" class="error">
+							<tr id="password-error" class="error" <c:if test="${registerViewHelper.validPassword}">style="display:none;"</c:if>>
 								<td colspan="3">${registerViewHelper.passwordErrorMsg}</td>
 							</tr>
 							<tr>
 								<td class="input-title">Confirm password:</td>
-								<td class="input"><input type="password" maxlength="16" name="conf-password"></td>
+								<td class="input"><input type="password" maxlength="16" name="conf-password" value="${registerViewHelper.confPassword}"></td>
 								<td class="input-spacer"></td>
 							</tr>
-							<tr id="conf-password-error" class="error">
+							<tr id="conf-password-error" class="error" <c:if test="${registerViewHelper.matchForPassword}">style="display:none;"</c:if>>
 								<td colspan="3">${registerViewHelper.confPasswordErrorMsg}</td>
 							</tr>
 						</table>
@@ -75,10 +76,10 @@
 						<table>
 							<tr>
 								<td class="input-title">Credit card number:</td>
-								<td class="input"><input type="text" maxlength="16" name="card-num"></td>
+								<td class="input"><input type="text" maxlength="16" name="card-num" value="${registerViewHelper.cardNum}"></td>
 								<td class="input-spacer"></td>
 							</tr>
-							<tr id="card-num-error" class="error">
+							<tr id="card-num-error" class="error" <c:if test="${registerViewHelper.validCardNum}">style="display:none;"</c:if>>
 								<td colspan="3">${registerViewHelper.cardNumErrorMsg}</td>
 							</tr>
 						</table>
@@ -86,26 +87,26 @@
 						<table>
 							<tr>
 								<td class="input-title">House number:</td>
-								<td class="input"><input type="text" maxlength="4" name="house-num"></td>
+								<td class="input"><input type="text" maxlength="4" name="house-num" value="${registerViewHelper.houseNum}"></td>
 								<td class="input-spacer"></td>
 							</tr>
-							<tr id="house-num-error" class="error">
+							<tr id="house-num-error" class="error" <c:if test="${registerViewHelper.validHouseNum}">style="display:none;"</c:if>>
 								<td colspan="3">${registerViewHelper.houseNumErrorMsg}</td>
 							</tr>
 							<tr>
 								<td class="input-title">Street name:</td>
-								<td class="input"><input type="text" maxlength="32" name="street"></td>
+								<td class="input"><input type="text" maxlength="32" name="street" value="${registerViewHelper.street}"></td>
 								<td class="input-spacer"></td>
 							</tr>
-							<tr id="street-error" class="error">
+							<tr id="street-error" class="error" <c:if test="${registerViewHelper.validStreet}">style="display:none;"</c:if>>
 								<td colspan="3">${registerViewHelper.streetErrorMsg}</td>
 							</tr>
 							<tr>
 								<td class="input-title">Post code:</td>
-								<td class="input"><input type="text" maxlength="7" name="postcode"></td>
+								<td class="input"><input type="text" maxlength="7" name="postcode" value="${registerViewHelper.postcode}"></td>
 								<td class="input-spacer"></td>
 							</tr>
-							<tr id="postcode-error" class="error">
+							<tr id="postcode-error" class="error" <c:if test="${registerViewHelper.validPostcode}">style="display:none;"</c:if>>
 								<td colspan="3">${registerViewHelper.postcodeErrorMsg}</td>
 							</tr>
 						</table>

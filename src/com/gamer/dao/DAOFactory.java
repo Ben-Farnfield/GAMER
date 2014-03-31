@@ -37,4 +37,8 @@ public class DAOFactory {
 	public ProductDAO getProductDAO() {
 		return (ProductDAO) new ProductDAOImpl(URL, PROP);
 	}
+	
+	public CustomerDAO getCustomerDAO() {
+		return (CustomerDAO) new CustomerDAOImpl(URL, PROP);
+	}
 }

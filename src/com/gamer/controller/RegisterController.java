@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gamer.dao.DAOFactory;
 import com.gamer.viewhelper.RegisterViewHelper;
 import com.gamer.viewhelper.ViewHelperFactory;
 
@@ -49,14 +50,16 @@ public class RegisterController extends HttpServlet {
 		case "register-submit":
 			RegisterViewHelper registerViewHelper = 
 					ViewHelperFactory.getInstance().getRegisterViewHelper(req);
+			req.setAttribute("registerViewHelper", registerViewHelper);
 			
-			if (registerViewHelper.isValidCustomerDetails()) {
-				// Add cust to DB
-				// Show Registered Page
-				// NOTE cust email could be in DB, need to handle this
-				System.out.println("Valid customer");
-			} else {
-				req.setAttribute("registerViewHelper", registerViewHelper);
+			if (registerViewHelper.containsValidCustomerDetails()
+					&& !registerViewHelper.isEmailInDatabase()) {
+
+				DAOFactory.getInstance().getCustomerDAO()
+						.insertCustomer(registerViewHelper.createCustomer());
+				url += "RegisterSuccessful.jsp";
+			} 
+			else {
 				url += "RegisterSubmitted.jsp";
 			}
 			break;

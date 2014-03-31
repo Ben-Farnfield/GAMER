@@ -85,3 +85,7 @@ tr.error td {
 	color: #99FF66;
 	font-style: italic;
 }
+
+p#welcome {
+	font-size: 16pt;
+}

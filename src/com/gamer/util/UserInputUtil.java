@@ -64,7 +64,7 @@ public class UserInputUtil {
 	// POSTCODE
 	public static boolean isValidPostcode(String postcode) {
 		if (postcode == null) return false;
-		return postcode.matches("[A-Z]{2}[0-9]{1,2}\\s[0-9]{1,2}[A-Z]{2}");
+		return postcode.matches("[a-zA-Z]{2}[0-9]{1,2}\\s[0-9]{1,2}[a-zA-Z]{2}");
 	}
 	
 	public static String formatPostcode(String postcode) {
@@ -75,7 +75,7 @@ public class UserInputUtil {
 	// EMAIL
 	public static boolean isValidEmail(String email) {
 		if (email == null) return false;
-		return email.matches("[\\w-_]+@[\\w-_]+\\.[a-zA-Z]+");
+		return email.matches("[\\w-_\\.]+@[\\w-_]+\\.[a-zA-Z]+");
 	}
 	
 	public static String formatEmail(String email) {

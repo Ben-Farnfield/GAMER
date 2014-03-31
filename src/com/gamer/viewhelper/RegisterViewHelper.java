@@ -1,5 +1,7 @@
 package com.gamer.viewhelper;
 
+import com.gamer.dao.DAOFactory;
+import com.gamer.model.Customer;
 import com.gamer.util.UserInputUtil;
 
 public class RegisterViewHelper {
@@ -16,6 +18,8 @@ public class RegisterViewHelper {
 			"post code should be in the format AA9 9AA";
 	private static final String EMAIL_ERROR_MSG = 
 			"email must be in the format name@domain.com";
+	private static final String EMAIL_PREV_USED_ERROR_MSG =
+			"this email address has already been registered";
 	private static final String CARD_NUM_ERROR_MSG = 
 			"card number can only contain numbers";
 	private static final String PASSWORD_ERROR_MSG =
@@ -39,7 +43,6 @@ public class RegisterViewHelper {
 	public String getForename() {return forename;}
 	public String getForenameErrorMsg() {return FORENAME_ERROR_MSG;}
 	public boolean isValidForename() {
-		System.out.println(forename);
 		return UserInputUtil.isValidForename(forename);
 	}
 	
@@ -77,6 +80,10 @@ public class RegisterViewHelper {
 	public boolean isValidEmail() {
 		return UserInputUtil.isValidEmail(email);
 	}
+	public String getEmailPrevUsedErrorMsg() {return EMAIL_PREV_USED_ERROR_MSG;}
+	public boolean isEmailInDatabase() {
+		return DAOFactory.getInstance().getCustomerDAO().isEmailInDatabase(email);
+	}
 	
 	public void setCardNum(String cardNum) {this.cardNum = cardNum;}
 	public String getCardNum() {return cardNum;}
@@ -99,7 +106,7 @@ public class RegisterViewHelper {
 		return UserInputUtil.isMatchForPassword(password, confPassword);
 	}
 	
-	public boolean isValidCustomerDetails() {
+	public boolean containsValidCustomerDetails() {
 		return isValidForename()
 				&& isValidSurname()
 				&& isValidHouseNum()
@@ -109,5 +116,18 @@ public class RegisterViewHelper {
 				&& isValidCardNum()
 				&& isValidPassword()
 				&& isMatchForPassword();
+	}
+	
+	public Customer createCustomer() {
+		Customer customer = new Customer();
+		customer.setForename(UserInputUtil.formatForename(forename));
+		customer.setSurname(UserInputUtil.formatSurname(surname));
+		customer.setEmail(UserInputUtil.formatEmail(email));
+		customer.setPassword(UserInputUtil.formatPassword(password));
+		customer.setCardNum(Long.parseLong(UserInputUtil.formatCardNum(cardNum)));
+		customer.setHouseNo(Integer.parseInt(UserInputUtil.formatHouseNum(houseNum)));
+		customer.setStreet(UserInputUtil.formatStreet(street));
+		customer.setPostCode(UserInputUtil.formatPostcode(postcode));
+		return customer;
 	}
 }

@@ -10,7 +10,7 @@ public class Customer {
 	private String postCode;
 	private String email;
 	private double balance;
-	private int cardNum;
+	private long cardNum;
 	private String password;
 	
 	public int getId() {return id;}
@@ -37,8 +37,8 @@ public class Customer {
 	public double getBalance() {return balance;}
 	public void setBalance(double balance) {this.balance = balance;}
 	
-	public int getCardNum() {return cardNum;}
-	public void setCardNum(int cardNum) {this.cardNum = cardNum;}
+	public long getCardNum() {return cardNum;}
+	public void setCardNum(long cardNum) {this.cardNum = cardNum;}
 	
 	public String getPassword() {return password;}
 	public void setPassword(String password) {this.password = password;}
