@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
  * 
  */
 @WebServlet(value="/shop")
-public class ShopController extends HttpServlet {
+public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShopController() { super(); }
+    public FrontController() { super(); }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest req, HttpServletResponse res)
@@ -46,11 +46,15 @@ public class ShopController extends HttpServlet {
 			break;
 			
 		case "register":
-			url += "Register.jsp";
+		case "register-submit":
+			url += "registerController";
 			break;
 			
 		case "basket":
-			url += "basketServlet";
+		case "add-to-basket":
+		case "rem-from-basket":
+		case "del-from-basket":
+			url += "basketController";
 			break;
 			
 		case "games":

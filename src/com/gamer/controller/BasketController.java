@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 /**
  * 
  */
-@WebServlet("/basketServlet")
+@WebServlet("/basketController")
 public class BasketController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -61,7 +61,7 @@ public class BasketController extends HttpServlet {
 			getServletContext().getRequestDispatcher("/Basket.jsp").forward(req, res);
 			break;
 		
-		case "add_to_basket":
+		case "add-to-basket":
 			if (id != null) {
 				basket.addOneToBasket(Integer.parseInt(id));
 
@@ -76,7 +76,7 @@ public class BasketController extends HttpServlet {
 			}
 			break;
 
-		case "rem_from_basket":
+		case "rem-from-basket":
 			if (id != null) {
 				
 				ProductInBasket prodInBasket = basket.getProductInBasket(Integer.parseInt(id));
@@ -98,7 +98,7 @@ public class BasketController extends HttpServlet {
 			}
 			break;
 			
-		case "del_from_basket":
+		case "del-from-basket":
 			if (id != null) {
 				basket.removeAllFromBasket(Integer.parseInt(id));
 				
