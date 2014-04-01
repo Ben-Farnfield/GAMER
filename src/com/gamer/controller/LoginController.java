@@ -7,22 +7,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.gamer.dao.DAOFactory;
-import com.gamer.viewhelper.RegisterViewHelper;
+import com.gamer.model.Customer;
+import com.gamer.viewhelper.LoginViewHelper;
 import com.gamer.viewhelper.ViewHelperFactory;
 
 /**
  * 
  */
-@WebServlet("/registerController")
-public class RegisterController extends HttpServlet {
+@WebServlet("/loginController")
+public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterController() {super();}
+    public LoginController() {super();}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest req, HttpServletResponse res)
@@ -38,29 +40,31 @@ public class RegisterController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) 
 			throws ServletException, IOException {
 		
+		HttpSession session = req.getSession(true);
+		
 		String url = "/";
 		
 		String action = (String)req.getParameter("action");
 		
-		RegisterViewHelper registerViewHelper = 
-				ViewHelperFactory.getInstance().getRegisterViewHelper(req);
-		req.setAttribute("registerViewHelper", registerViewHelper);
+		LoginViewHelper loginViewHelper = 
+				ViewHelperFactory.getInstance().getLoginViewHelper(req);
+		req.setAttribute("loginViewHelper", loginViewHelper);
 		
 		switch (action) {
-		case "register":
-			url += "Register.jsp";
+		case "login":
+			url += "Login.jsp";
 			break;
 
-		case "register-submit":
-			if (registerViewHelper.containsValidCustomerDetails()
-					&& !registerViewHelper.isEmailInDatabase()) {
-
-				DAOFactory.getInstance().getCustomerDAO()
-						.insertCustomer(registerViewHelper.createCustomer());
-				url += "RegisterSuccessful.jsp";
-			} 
+		case "login-submit":
+			if (loginViewHelper.containsValidLoginDetails()
+					&& loginViewHelper.emailPasswordComboIsInDatabase()) {
+				Customer customer = DAOFactory.getInstance().getCustomerDAO()
+						.findCustomerByEmail(loginViewHelper.getEmail());
+				session.setAttribute("loggedInCustomer", customer);
+				url += "LoginSuccessful.jsp";
+			}
 			else {
-				url += "RegisterSubmitted.jsp";
+				url += "LoginSubmitted.jsp";
 			}
 			break;
 		}

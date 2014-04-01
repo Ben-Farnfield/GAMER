@@ -3,9 +3,8 @@ $(document).ready(function(){
 		var id = $(this).attr('id');
 		$.get('/GAMER/shop?action=add-to-basket&id=' + id, function(respJson) {
         	$('img#add-basket-' + id).attr({'src':'/GAMER/res/img/misc/AddedToBasket.png', 'style':'display: none;'});
-        	$('img#add-basket-' + id).fadeIn(300, function(){
-        		setTotalNumProductsInBasket(respJson);
-        	});
+        	setTotalNumProductsInBasket(respJson);
+        	$('img#add-basket-' + id).fadeIn(300);
 		});
 	});
 });

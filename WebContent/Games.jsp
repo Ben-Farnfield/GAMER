@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<c:if test="${empty pageOfProducts}">
+<c:if test="${empty productViewHelper}">
 	<jsp:forward page="/shop?action=games"/>
 </c:if>
 <!DOCTYPE html>

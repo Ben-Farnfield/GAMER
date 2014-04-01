@@ -2,7 +2,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="/GAMER/res/js/basket.js"></script>
-<c:forEach var="product" items="${pageOfProducts.products}">
+<c:forEach var="product" items="${productViewHelper.productsForPage}">
 	<c:choose>
 		<c:when test="${product.inBasket}">
 			<c:set var="addedToBasketPic" value="/GAMER/res/img/misc/AddedToBasket.png"/>

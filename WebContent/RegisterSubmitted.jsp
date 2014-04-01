@@ -13,7 +13,8 @@
 		<link rel="stylesheet" type="text/css" href="/GAMER/res/css/Content.css">
 		<link rel="stylesheet" type="text/css" href="/GAMER/res/css/Footer.css">
 		<link rel="stylesheet" type="text/css" href="/GAMER/res/css/LoginRegister.css">
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<script src="/GAMER/res/js/lib/jquery-1.11.0.js"></script>
+		<script src="/GAMER/res/js/register.js"></script>
 	</head>
 	<body class="login">
 		<jsp:include page="/res/template/TopBar.jsp" flush="true"/>
@@ -44,7 +45,7 @@
 							</tr>
 							<tr>
 								<td class="input-title">E-mail:</td>
-								<td class="input"><input id="email" type="text" maxlength="32" name="email" value="${registerViewHelper.email}"></td>
+								<td class="input"><input type="text" maxlength="32" name="email" value="${registerViewHelper.email}"></td>
 								<td class="input-spacer"></td>
 							</tr>
 							<tr id="email-error" class="error" <c:if test="${registerViewHelper.validEmail}">style="display:none;"</c:if>>
@@ -55,7 +56,7 @@
 							</tr>
 							<tr>
 								<td class="input-title">Password:</td>
-								<td class="input"><input id="pass" type="password" maxlength="16" name="password" value="${registerViewHelper.password}"></td>
+								<td class="input"><input type="password" maxlength="16" name="password" value="${registerViewHelper.password}"></td>
 								<td class="input-spacer"></td>
 							</tr>
 							<tr id="password-error" class="error" <c:if test="${registerViewHelper.validPassword}">style="display:none;"</c:if>>

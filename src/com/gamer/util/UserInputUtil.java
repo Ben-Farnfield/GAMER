@@ -8,40 +8,28 @@ public class UserInputUtil {
 	// FORENAME
 	public static boolean isValidForename(String forename) {
 		if (forename == null) return false;
-		return forename.matches("[a-zA-Z]+");
+		return forename.matches("[a-zA-Z]+") && forename.length() <= 32;
 	}
 
 	public static String formatForename(String forename) {
-		forename = forename.trim();
-		forename = forename.toLowerCase();
-		String firstLetter = forename.substring(0, 1).toUpperCase();
-		return firstLetter + forename.substring(1);
+		return capFirstLetter(forename);
 	}
 	
 	// SURNAME
 	public static boolean isValidSurname(String surname) {
 		if (surname == null) return false;
-		return surname.matches("(O'|o')?[a-zA-Z]+(-[a-zA-Z])?[a-zA-Z]*");
+		return surname.matches("[a-zA-Z][a-zA-Z ,'.-]+")
+				 && surname.length() <= 32;
 	}
 
 	public static String formatSurname(String surname) {
-		surname = surname.trim();
-		surname = surname.toLowerCase();
-		String firstLetter = surname.substring(0, 1).toUpperCase();
-		if (surname.matches(".*-.*")) {
-			int index = surname.indexOf("-");
-			String secondFirstLetter = 
-					surname.substring(index+1, index+2).toUpperCase();
-			return firstLetter + surname.substring(1, index+1) 
-					+ secondFirstLetter + surname.substring(index+2);
-		}
-		return firstLetter + surname.substring(1);
+		return capFirstLetter(surname);
 	}
 	
 	// HOUSE NUM
 	public static boolean isValidHouseNum(String houseNum) {
 		if (houseNum == null) return false;
-		return houseNum.matches("\\d+");
+		return houseNum.matches("\\d+")  && houseNum.length() <= 4;
 	}
 	
 	public static String formatHouseNum(String houseNum) {
@@ -51,20 +39,18 @@ public class UserInputUtil {
 	// STREET
 	public static boolean isValidStreet(String street) {
 		if (street == null) return false;
-		return street.matches("[a-zA-Z\\s]+");
+		return street.matches("[a-zA-Z ]+")  && street.length() <= 32;
 	}
 	
 	public static String formatStreet(String street) {
-		street = street.trim();
-		street = street.toLowerCase();
-		String firstLetter = street.substring(0, 1).toUpperCase();
-		return firstLetter + street.substring(1);
+		return capFirstLetter(street);
 	}
 	
 	// POSTCODE
 	public static boolean isValidPostcode(String postcode) {
 		if (postcode == null) return false;
-		return postcode.matches("[a-zA-Z]{2}[0-9]{1,2}\\s[0-9]{1,2}[a-zA-Z]{2}");
+		return postcode.matches("[a-zA-Z]{2}\\d{1,2}\\s*\\d{1,2}[a-zA-Z]{2}")
+				 && postcode.length() <= 10;
 	}
 	
 	public static String formatPostcode(String postcode) {
@@ -75,7 +61,8 @@ public class UserInputUtil {
 	// EMAIL
 	public static boolean isValidEmail(String email) {
 		if (email == null) return false;
-		return email.matches("[\\w-_\\.]+@[\\w-_]+\\.[a-zA-Z]+");
+		return email.matches("[\\w-_.]+@[\\w-.]+\\.[a-zA-Z]{2,4}")
+				 && email.length() <= 100;
 	}
 	
 	public static String formatEmail(String email) {
@@ -86,7 +73,7 @@ public class UserInputUtil {
 	// CARD NUM
 	public static boolean isValidCardNum(String cardNum) {
 		if (cardNum == null) return false;
-		return cardNum.matches("\\d+");
+		return cardNum.matches("\\d{16}")  && cardNum.length() <= 16;
 	}
 	
 	public static String formatCardNum(String cardNum) {
@@ -96,7 +83,7 @@ public class UserInputUtil {
 	// PASSWORD
 	public static boolean isValidPassword(String password) {
 		if (password == null) return false;
-		return password.matches(".{6,16}");
+		return password.length() >= 6 && password.length() <= 16;
 	}
 	
 	public static boolean isMatchForPassword(String password, String confPassword) {
@@ -107,5 +94,10 @@ public class UserInputUtil {
 	public static String formatPassword(String password) {
 		// DO NOTHING
 		return password;
+	}
+	
+	private static String capFirstLetter(String field) {
+		field = field.trim().toLowerCase();
+		return field.substring(0, 1).toUpperCase() + field.substring(1);
 	}
 }

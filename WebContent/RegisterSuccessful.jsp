@@ -13,7 +13,7 @@
 		<link rel="stylesheet" type="text/css" href="/GAMER/res/css/Content.css">
 		<link rel="stylesheet" type="text/css" href="/GAMER/res/css/Footer.css">
 		<link rel="stylesheet" type="text/css" href="/GAMER/res/css/LoginRegister.css">
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<script src="/GAMER/res/js/lib/jquery-1.11.0.js"></script>
 	</head>
 	<body class="login">
 		<jsp:include page="/res/template/TopBar.jsp" flush="true"/>
@@ -21,9 +21,8 @@
 		<jsp:include page="/res/template/Nav.jsp" flush="true"/>
 		<div id="content">
 			<div id="reg-cont">
-				<p id="welcome">Hi ${registerViewHelper.forename}, welcome to GAMER.com!</p>
-				<br/><br/><br/><br/><br/><br/>
-				<p>continue shopping <a href="/GAMER/shop?action=home">here</a></p>
+				<p id="welcome">Hi ${registerViewHelper.forename}, welcome to GAMER.com !</p>
+				<p id="more-shopping">continue shopping <a href="/GAMER/shop?action=home">here</a></p>
 			</div>
 		</div> <!-- END content -->
 		<jsp:include page="/res/template/Footer.jsp" flush="true"/>

@@ -103,7 +103,35 @@ public class ProductDAOImpl implements ProductDAO {
 	
 	@Override
 	public ArrayList<Product> searchByKeywords(String[] keywords) {
-		return new ArrayList<>();
+		ArrayList<Product> products = new ArrayList<>();
+		
+		if (keywords.length == 0) return products; 
+		
+		String sql = "SELECT * FROM product WHERE ";
+		
+		for (String keyword : keywords) {
+			sql += "product_name ILIKE '%" + keyword 
+					+ "%' OR genre ILIKE '%" + keyword 
+					+ "%' OR description ILIKE '%" + keyword 
+					+ "%' OR ";
+		}
+		
+		sql = sql.substring(0, sql.length()-4) + ";"; // -4 to remove trailing OR
+		
+		Connection con = null;
+		try {
+			con = getConnection();
+			PreparedStatement statement = con.prepareStatement(sql);
+			ResultSet resultSet = statement.executeQuery();
+			while(resultSet.next()) {
+				products.add(buildProduct(resultSet));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (con != null) closeConnection(con);
+		}		
+		return products;
 	}
 	
 	private Product buildProduct(ResultSet resultSet) throws SQLException {

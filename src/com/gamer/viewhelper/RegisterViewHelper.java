@@ -9,7 +9,7 @@ public class RegisterViewHelper {
 	private static final String FORENAME_ERROR_MSG = 
 			"forename can only contain letters";
 	private static final String SURNAME_ERROR_MSG =
-			"surname can only contain the characters a to z ' and -";
+			"surname can only contain letters and the characters ' - . and space";
 	private static final String HOUSE_NUM_ERROR_MSG = 
 			"house number can only contain numbers";
 	private static final String STREET_ERROR_MSG = 
@@ -21,11 +21,11 @@ public class RegisterViewHelper {
 	private static final String EMAIL_PREV_USED_ERROR_MSG =
 			"this email address has already been registered";
 	private static final String CARD_NUM_ERROR_MSG = 
-			"card number can only contain numbers";
+			"card number can only contain numbers and must be 16 digits";
 	private static final String PASSWORD_ERROR_MSG =
 			"passwords need to be between 6 and 16 characters";
 	private static final String CONF_PASSWORD_ERROR_MSG = 
-			"password and confirmation password must match";
+			"password and confirmation password don't match";
 
 	private String forename;
 	private String surname;

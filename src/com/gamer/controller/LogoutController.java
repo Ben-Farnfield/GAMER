@@ -7,18 +7,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * 
  */
-@WebServlet(value="/shop")
-public class FrontController extends HttpServlet {
+@WebServlet("/logoutController")
+public class LogoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FrontController() { super(); }
+    public LogoutController() {super();}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest req, HttpServletResponse res)
@@ -34,41 +35,12 @@ public class FrontController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) 
 			throws ServletException, IOException {
 		
-		String action = (String)req.getParameter("action");
-		if (action == null) action = "";
+		HttpSession session = req.getSession();
 		
-		String url = "/";
-		
-		switch (action) {
-			
-		case "login":
-		case "login-submit":
-			url += "loginController";
-			break;
-			
-		case "logout":
-			url += "logoutController";
-			break;
-			
-		case "register":
-		case "register-submit":
-			url += "registerController";
-			break;
-			
-		case "basket":
-		case "add-to-basket":
-		case "rem-from-basket":
-		case "del-from-basket":
-			url += "basketController";
-			break;
-			
-		case "games":
-		case "toys":
-		case "search":
-		default:
-			url += "productDisplay";
-			break;
+		if(session != null) {
+			session.invalidate();
 		}
-		getServletContext().getRequestDispatcher(url).forward(req, res);
+		
+		getServletContext().getRequestDispatcher("/LogoutSuccessful.jsp").forward(req, res);
 	}
 }

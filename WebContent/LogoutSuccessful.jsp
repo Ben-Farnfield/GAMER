@@ -21,31 +21,8 @@
 		<jsp:include page="/res/template/Nav.jsp" flush="true"/>
 		<div id="content">
 			<div id="reg-cont">
-				<form method="post" action="shop?action=login-submit" accept-charset="UTF-8">
-					<fieldset class="reg-log">
-						<legend>Login</legend>
-						<table>
-							<tr>
-								<td class="input-title">E-mail:</td>
-								<td class="input"><input type="text" maxlength="100" name="email"></td>
-								<td class="input-spacer"></td>
-							</tr>
-							<tr id="email-error" class="error" style="display:none;">
-								<td colspan="3">${loginViewHelper.emailErrorMsg}</td>
-							</tr>
-							<tr>
-								<td class="input-title">Password:</td>
-								<td class="input"><input type="password" maxlength="16" name="password"></td>
-								<td class="input-spacer"></td>
-							</tr>
-							<tr id="password-error" class="error" style="display:none;">
-								<td colspan="3">${loginViewHelper.passwordErrorMsg}</td>
-							</tr>
-						</table>
-					</fieldset>
-					<input id="submit" type="submit" value="Submit" />
-				</form>
-				<p>If you're not registered then go ahead and <a href="/GAMER/shop?action=register">register</a> now.</p>
+				<p id="welcome">You've been logged out, come back soon !</p>
+				<p id="more-shopping">login <a href="/GAMER/shop?action=login">here</a></p>
 			</div>
 		</div> <!-- END content -->
 		<jsp:include page="/res/template/Footer.jsp" flush="true"/>

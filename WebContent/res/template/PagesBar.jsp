@@ -2,25 +2,25 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:choose>
-	<c:when test="${pageOfProducts.totalNumPages < 1}"/>
+	<c:when test="${productViewHelper.totalNumberOfPages < 2}"/>
 	<c:otherwise>
 		<div id="pages-bar">
 			<table>
 				<tr>
 					<td>
-						<c:if test="${pageOfProducts.pageNum != 1}">
+						<c:if test="${productViewHelper.currentPage != 1}">
 							<form>
 								<input type="hidden" name="action" value="${param['action']}"/>
-								<input type="hidden" name="n" value="${pageOfProducts.pageNum - 1}"/>	
+								<input type="hidden" name="n" value="${productViewHelper.currentPage - 1}"/>	
 								<input id="prev-page" type="submit" value="< prev page"/>
 							</form>
 						</c:if>
 					</td>
 					<td>
 						<p>
-							<c:forEach var="i" begin="1" end="${pageOfProducts.totalNumPages}">
+							<c:forEach var="i" begin="1" end="${productViewHelper.totalNumberOfPages}">
 								<c:choose>
-									<c:when test="${i == pageOfProducts.pageNum}">
+									<c:when test="${i == productViewHelper.currentPage}">
 										<span id="current-page">
 											<c:out value="${i}"/>
 										</span>
@@ -33,10 +33,10 @@
 						</p>
 					</td>
 					<td>
-						<c:if test="${pageOfProducts.pageNum != pageOfProducts.totalNumPages}">
+						<c:if test="${productViewHelper.currentPage != productViewHelper.totalNumberOfPages}">
 							<form>
 								<input type="hidden" name="action" value="${param['action']}"/>
-								<input type="hidden" name="n" value="${pageOfProducts.pageNum + 1}"/>	
+								<input type="hidden" name="n" value="${productViewHelper.currentPage + 1}"/>	
 								<input id="next-page" type="submit" value="next page >"/>
 							</form>
 						</c:if>
