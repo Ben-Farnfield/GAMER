@@ -77,7 +77,9 @@
 						<table>
 							<tr>
 								<td id="purchase">
-									<input id="pur-button" type="submit" value="Purchase"/>
+									<form action="shop?action=purchase" method="post">
+										<input id="pur-button" type="submit" value="Purchase"/>
+									</form>
 								</td>
 							</tr>
 						</table>

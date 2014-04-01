@@ -115,6 +115,9 @@ public class ViewHelperFactory {
 			
 			productViewHelper.setProducts(products, basket);
 		}
+		else {
+			productViewHelper.setProducts(new ArrayList<Product>(), null);
+		}
 		
 		return productViewHelper;
 	}

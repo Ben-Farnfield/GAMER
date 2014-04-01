@@ -22,7 +22,7 @@
 		<div id="content">
 			<div id="reg-cont">
 				<p id="welcome">Hi ${registerViewHelper.forename}, welcome to GAMER.com !</p>
-				<p id="more-shopping">continue shopping <a href="/GAMER/shop?action=home">here</a></p>
+				<p id="more-shopping">start shopping <a href="/GAMER/shop?action=home">here</a></p>
 			</div>
 		</div> <!-- END content -->
 		<jsp:include page="/res/template/Footer.jsp" flush="true"/>

@@ -11,6 +11,9 @@
 						<c:if test="${productViewHelper.currentPage != 1}">
 							<form>
 								<input type="hidden" name="action" value="${param['action']}"/>
+								<c:if test="${not empty param['keywords']}">
+									<input type="hidden" name="keywords" value="${param['keywords']}"/>
+								</c:if>
 								<input type="hidden" name="n" value="${productViewHelper.currentPage - 1}"/>	
 								<input id="prev-page" type="submit" value="< prev page"/>
 							</form>
@@ -36,6 +39,9 @@
 						<c:if test="${productViewHelper.currentPage != productViewHelper.totalNumberOfPages}">
 							<form>
 								<input type="hidden" name="action" value="${param['action']}"/>
+								<c:if test="${not empty param['keywords']}">
+									<input type="hidden" name="keywords" value="${param['keywords']}"/>
+								</c:if>
 								<input type="hidden" name="n" value="${productViewHelper.currentPage + 1}"/>	
 								<input id="next-page" type="submit" value="next page >"/>
 							</form>

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html>
@@ -21,6 +22,9 @@
 		<jsp:include page="/res/template/Nav.jsp" flush="true"/>
 		<div id="content">
 			<div id="reg-cont">
+				<c:if test="${requestAction == 'purchase'}">
+					<p>you need to login or register before you purchase</p>
+				</c:if>
 				<form method="post" action="shop?action=login-submit" accept-charset="UTF-8">
 					<fieldset class="reg-log">
 						<legend>Login</legend>
@@ -43,9 +47,19 @@
 							</tr>
 						</table>
 					</fieldset>
+					<c:if test="${requestAction == 'purchase'}">
+						<input type="hidden" name="requestAction" value="purchase">
+					</c:if>
 					<input id="submit" type="submit" value="Submit" />
 				</form>
-				<p>If you're not registered then go ahead and <a href="/GAMER/shop?action=register">register</a> now.</p>
+				<c:choose>
+					<c:when test="${requestAction == 'purchase'}">
+						<p>If you're not registered then go ahead and <a href="/GAMER/shop?action=register&requestAction=purchase">register</a> now.</p>
+					</c:when>
+					<c:otherwise>
+						<p>If you're not registered then go ahead and <a href="/GAMER/shop?action=register">register</a> now.</p>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div> <!-- END content -->
 		<jsp:include page="/res/template/Footer.jsp" flush="true"/>

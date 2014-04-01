@@ -16,6 +16,7 @@
 		<link rel="stylesheet" type="text/css" href="/GAMER/res/css/Content.css">
 		<link rel="stylesheet" type="text/css" href="/GAMER/res/css/Footer.css">
 		<link rel="stylesheet" type="text/css" href="/GAMER/res/css/Product.css">
+		<link rel="stylesheet" type="text/css" href="/GAMER/res/css/Search.css">
 		<link rel="stylesheet" type="text/css" href="/GAMER/res/css/PagesBar.css">
 		<script src="/GAMER/res/js/lib/jquery-1.11.0.js"></script>
 	</head>
@@ -24,7 +25,20 @@
 		<jsp:include page="/res/template/Header.jsp" flush="true"/>
 		<jsp:include page="/res/template/Nav.jsp" flush="true"/>
 		<div id="content">
-			<jsp:include page="/res/template/ProductDisplay.jsp" flush="true"/>
+			<c:choose>
+				<c:when test="${empty productViewHelper.productsForPage}">
+					<div id="no-result-div">
+						<table id="no-result-table">
+							<tr>
+								<td id="no-result">No results found for "<c:out value="${param['keywords']}"/>"</td>
+							</tr>
+						</table>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<jsp:include page="/res/template/ProductDisplay.jsp" flush="true"/>
+				</c:otherwise>
+			</c:choose>
 			<jsp:include page="/res/template/PagesBar.jsp" flush="true"/>
 		</div> <!-- END content -->
 		<jsp:include page="/res/template/Footer.jsp" flush="true"/>

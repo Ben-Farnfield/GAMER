@@ -112,6 +112,9 @@
 							</tr>
 						</table>
 					</fieldset>
+					<c:if test="${requestAction == 'purchase'}">
+						<input type="hidden" name="requestAction" value="purchase">
+					</c:if>
 					<input id="submit" type="submit" value="Submit" />
 				</form>
 				<p>If you've already registered then go ahead and <a href="/GAMER/shop?action=login">login</a>.</p>

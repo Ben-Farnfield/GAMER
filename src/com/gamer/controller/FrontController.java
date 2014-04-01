@@ -40,6 +40,10 @@ public class FrontController extends HttpServlet {
 		String url = "/";
 		
 		switch (action) {
+		
+		case "purchase":
+			url += "purchaseController";
+			break;
 			
 		case "login":
 		case "login-submit":

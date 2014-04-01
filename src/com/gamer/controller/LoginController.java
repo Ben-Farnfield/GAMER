@@ -61,9 +61,18 @@ public class LoginController extends HttpServlet {
 				Customer customer = DAOFactory.getInstance().getCustomerDAO()
 						.findCustomerByEmail(loginViewHelper.getEmail());
 				session.setAttribute("loggedInCustomer", customer);
-				url += "LoginSuccessful.jsp";
+				
+				if ("purchase".equals(req.getParameter("requestAction"))) {
+					url += "purchaseController";
+				}
+				else {
+					url += "LoginSuccessful.jsp";
+				}
 			}
 			else {
+				if ("purchase".equals(req.getParameter("requestAction"))) {
+					req.setAttribute("requestAction", "purchase");
+				}
 				url += "LoginSubmitted.jsp";
 			}
 			break;

@@ -43,6 +43,8 @@ public class ProductViewHelper {
 		int firstProduct = (currentPage - 1) * NUM_PROD_PER_PAGE;
 		int lastProduct = firstProduct + NUM_PROD_PER_PAGE;
 		
+		if (products == null) System.out.println("WHY !!");
+		
 		try {
 			return products.subList(firstProduct, lastProduct);
 		} catch (IndexOutOfBoundsException e) {

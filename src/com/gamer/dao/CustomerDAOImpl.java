@@ -111,6 +111,28 @@ public class CustomerDAOImpl implements CustomerDAO {
 		}
 	}
 	
+	@Override
+	public double findCustomersBalance(int id) {
+		double customersBalance = 0;
+		
+		String sql = "SELECT balance FROM customer WHERE customer_id='" + id + "';";
+		
+		Connection con = null;
+		try {
+			con = getConnection();
+			PreparedStatement statement = con.prepareStatement(sql);
+			ResultSet resultSet = statement.executeQuery();
+			resultSet.next();
+			customersBalance = resultSet.getDouble("balance");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (con != null) closeConnection(con);
+		}
+		
+		return customersBalance;
+	}
+	
 	private Customer buildCustomer(ResultSet resultSet) throws SQLException {
 		Customer customer = new Customer();
 		customer.setBalance(resultSet.getDouble("balance"));

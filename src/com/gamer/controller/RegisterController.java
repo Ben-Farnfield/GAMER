@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.gamer.dao.DAOFactory;
 import com.gamer.viewhelper.RegisterViewHelper;
@@ -38,6 +39,8 @@ public class RegisterController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) 
 			throws ServletException, IOException {
 		
+		HttpSession session = req.getSession(true);
+		
 		String url = "/";
 		
 		String action = (String)req.getParameter("action");
@@ -57,9 +60,20 @@ public class RegisterController extends HttpServlet {
 
 				DAOFactory.getInstance().getCustomerDAO()
 						.insertCustomer(registerViewHelper.createCustomer());
-				url += "RegisterSuccessful.jsp";
+				session.setAttribute("loggedInCustomer", 
+						registerViewHelper.createCustomer());
+				
+				if ("purchase".equals(req.getParameter("requestAction"))) {
+					url += "purchaseController";
+				}
+				else {
+					url += "RegisterSuccessful.jsp";
+				}
 			} 
 			else {
+				if ("purchase".equals(req.getParameter("requestAction"))) {
+					req.setAttribute("requestAction", "purchase");
+				}
 				url += "RegisterSubmitted.jsp";
 			}
 			break;

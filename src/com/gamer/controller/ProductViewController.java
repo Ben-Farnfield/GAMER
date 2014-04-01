@@ -15,7 +15,7 @@ import com.gamer.viewhelper.ViewHelperFactory;
  * 
  */
 @WebServlet("/productDisplay")
-public class ProductDisplayController extends HttpServlet {
+public class ProductViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private static final String GAMES = "games";
@@ -25,7 +25,7 @@ public class ProductDisplayController extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductDisplayController() { super(); }
+    public ProductViewController() { super(); }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest req, HttpServletResponse res)

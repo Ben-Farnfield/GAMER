@@ -10,5 +10,7 @@ public interface CustomerDAO {
 	
 	public Customer findCustomerByEmail(String email);
 	
+	public double findCustomersBalance(int id);
+	
 	public void insertCustomer(Customer customer);
 }
