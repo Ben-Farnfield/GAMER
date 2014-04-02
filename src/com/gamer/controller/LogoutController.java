@@ -41,6 +41,10 @@ public class LogoutController extends HttpServlet {
 			session.invalidate();
 		}
 		
-		getServletContext().getRequestDispatcher("/LogoutSuccessful.jsp").forward(req, res);
+		req.setAttribute("msg", "You've been logged out, come back soon !");
+		req.setAttribute("link", "login "
+				+ "<a href=\"/GAMER/shop?action=login\">here</a>");
+		
+		getServletContext().getRequestDispatcher("/UserMsg.jsp").forward(req, res);
 	}
 }

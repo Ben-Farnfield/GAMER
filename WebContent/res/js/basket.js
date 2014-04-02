@@ -33,7 +33,6 @@ $(document).ready(function(){
 	});
 });
 
-// TODO fix bug where all items are removed if all set to 0 quantity
 $(document).ready(function(){
 	$('.rem-item').click(function(){
 		var id = $(this).attr('name');
@@ -50,7 +49,8 @@ $(document).ready(function(){
         		$('#pur-button').fadeOut(500, function(){
         			$('#bask-tab').remove();
 	        		$('#pur-button').remove();
-	        		$('#basket-content').html('<p id="no-items">There are currently no items in your basket</p>');
+	        		$('#basket-content').append('<p id="msg">There are currently no items in your basket</p>');
+	        		$('#basket-content').append('<p id="link">back to <a href="/GAMER/shop?action=home">shopping</a></p>');
 	        		setTotalNumProductsInBasket(respJson);
         		});
         	}

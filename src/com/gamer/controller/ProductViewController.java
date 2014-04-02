@@ -17,10 +17,6 @@ import com.gamer.viewhelper.ViewHelperFactory;
 @WebServlet("/productDisplay")
 public class ProductViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private static final String GAMES = "games";
-	private static final String TOYS = "toys";
-	private static final String SEARCH = "search";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -46,39 +42,46 @@ public class ProductViewController extends HttpServlet {
 		
 		ProductViewHelper productViewHelper;
 		
-		String url = "/";
+		String url = "/ProductView.jsp";
 		
 		switch (action) {
-		case GAMES:
+		case ViewHelperFactory.GAMES:
 			productViewHelper = ViewHelperFactory.getInstance()
 					.getProductViewHelper(ViewHelperFactory.GAMES, req);
 			req.setAttribute("productViewHelper", productViewHelper);
-			
-			url += "Games.jsp";
+			req.setAttribute("productViewType", ViewHelperFactory.GAMES);
 			break;
 
-		case TOYS:
+		case ViewHelperFactory.TOYS:
 			productViewHelper = ViewHelperFactory.getInstance()
 					.getProductViewHelper(ViewHelperFactory.TOYS, req);
 			req.setAttribute("productViewHelper", productViewHelper);
-			
-			url += "Toys.jsp";
+			req.setAttribute("productViewType", ViewHelperFactory.TOYS);
 			break;
 			
-		case SEARCH:
-			productViewHelper = ViewHelperFactory.getInstance()
-					.getSearchProductViewHelper(req);
-			req.setAttribute("productViewHelper", productViewHelper);
+		case ViewHelperFactory.SEARCH:
 			
-			url += "Search.jsp";		
+			productViewHelper = ViewHelperFactory.getInstance()
+					.getProductViewHelper(ViewHelperFactory.SEARCH, req);
+			
+			if (productViewHelper.getProducts().size() == 0) {
+				req.setAttribute("msg", "sorry, no results found for \"" 
+						+ productViewHelper.getKeyword() + "\"");
+				req.setAttribute("link", "back to "
+							+ "<a href=\"/GAMER/shop?action=home\">shopping</a>");
+				url = "/UserMsg.jsp";
+			}
+			else {
+				req.setAttribute("productViewHelper", productViewHelper);
+				req.setAttribute("productViewType", ViewHelperFactory.SEARCH);
+			}
 			break;
 			
 		default:
 			productViewHelper = ViewHelperFactory.getInstance()
 					.getProductViewHelper(ViewHelperFactory.HOME, req);
 			req.setAttribute("productViewHelper", productViewHelper);
-			
-			url += "Home.jsp";
+			req.setAttribute("productViewType", ViewHelperFactory.HOME);
 			break;
 		}
 		getServletContext().getRequestDispatcher(url).forward(req, res);

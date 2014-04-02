@@ -66,7 +66,11 @@ public class LoginController extends HttpServlet {
 					url += "purchaseController";
 				}
 				else {
-					url += "LoginSuccessful.jsp";
+					req.setAttribute("msg", "" + customer.getForename() 
+							+ ", welcome back to GAMER.com !");
+					req.setAttribute("link", "start shopping "
+							+ "<a href=\"/GAMER/shop?action=home\">here</a>");
+					url += "UserMsg.jsp";
 				}
 			}
 			else {

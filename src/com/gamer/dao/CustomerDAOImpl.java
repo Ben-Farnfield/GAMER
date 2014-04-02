@@ -95,8 +95,8 @@ public class CustomerDAOImpl implements CustomerDAO {
 						          + customer.getHouseNo() + "', '"
 						          + customer.getStreet() + "', '"
 						          + customer.getPostCode() + "', '"
-						          + customer.getEmail() + "', "
-						          + "'100', '"
+						          + customer.getEmail() + "', '"
+						          + customer.getBalance() + "', '"
 						          + customer.getCardNum() + "', '"
 						          + customer.getPassword() + "');";
 		Connection con = null;
@@ -122,8 +122,9 @@ public class CustomerDAOImpl implements CustomerDAO {
 			con = getConnection();
 			PreparedStatement statement = con.prepareStatement(sql);
 			ResultSet resultSet = statement.executeQuery();
-			resultSet.next();
-			customersBalance = resultSet.getDouble("balance");
+			if(resultSet.next()) {
+				customersBalance = resultSet.getDouble("balance");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -131,6 +132,24 @@ public class CustomerDAOImpl implements CustomerDAO {
 		}
 		
 		return customersBalance;
+	}
+	
+	@Override
+	public void decreaseBalance(int id, double amount) {
+		double balance = findCustomersBalance(id) - amount;
+		String sql = "UPDATE customer SET balance='" + balance 
+				+ "' WHERE customer_id='" + id + "';";
+		
+		Connection con = null;
+		try {
+			con = getConnection();
+			PreparedStatement statement = con.prepareStatement(sql);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (con != null) closeConnection(con);
+		}
 	}
 	
 	private Customer buildCustomer(ResultSet resultSet) throws SQLException {

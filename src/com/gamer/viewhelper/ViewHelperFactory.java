@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.gamer.dao.DAOFactory;
 import com.gamer.dao.ProductDAO;
 import com.gamer.model.Basket;
+import com.gamer.model.Customer;
 import com.gamer.model.Product;
 
 public class ViewHelperFactory {
@@ -15,6 +16,7 @@ public class ViewHelperFactory {
 	public static final String HOME = "home";
 	public static final String TOYS = "toys";
 	public static final String GAMES = "games";
+	public static final String SEARCH = "search";
 
 	private static ViewHelperFactory viewHelperFactory;
 	
@@ -89,41 +91,8 @@ public class ViewHelperFactory {
 		return loginViewHelper;
 	}
 	
-	public ProductViewHelper getSearchProductViewHelper(HttpServletRequest req) 
-			throws UnsupportedEncodingException {
-		
-		ProductViewHelper productViewHelper = new ProductViewHelper();
-		
-		if (req.getParameter("n") != null) {
-			productViewHelper.setCurrentPage(
-					Integer.parseInt(req.getParameter("n")));
-		}
-		else {
-			productViewHelper.setCurrentPage(1);
-		}
-		
-		if (req.getParameter("keywords") != null) {
-			
-			String keywordString = new String(req.getParameter("keywords")
-					.getBytes("iso-8859-1"), "UTF-8");
-			String[] keywords = keywordString.split("\\s");
-			
-			ArrayList<Product> products = DAOFactory.getInstance()
-					.getProductDAO().searchByKeywords(keywords);
-			
-			Basket basket = (Basket)req.getSession().getAttribute("basket");
-			
-			productViewHelper.setProducts(products, basket);
-		}
-		else {
-			productViewHelper.setProducts(new ArrayList<Product>(), null);
-		}
-		
-		return productViewHelper;
-	}
-	
-	public ProductViewHelper getProductViewHelper(
-			String page, HttpServletRequest req) {
+	public ProductViewHelper getProductViewHelper(String type, 
+			HttpServletRequest req) throws UnsupportedEncodingException {
 		
 		ProductViewHelper productViewHelper = new ProductViewHelper();
 		
@@ -137,7 +106,7 @@ public class ViewHelperFactory {
 		
 		ArrayList<Product> products = null;
 		ProductDAO dao = DAOFactory.getInstance().getProductDAO();
-		switch (page) {
+		switch (type) {
 		case HOME:
 			products = dao.findAllProducts();
 			break;
@@ -149,6 +118,30 @@ public class ViewHelperFactory {
 		case GAMES:
 			products = dao.findAllGames();
 			break;
+			
+		case SEARCH:
+			if (req.getParameter("keywords") != null) {
+				String keyword = new String(req.getParameter("keywords")
+						.getBytes("iso-8859-1"), "UTF-8");
+				
+				if (!"".equals(keyword) && !" ".equals(keyword)) {
+					String[] keywords = keyword.split("\\s");
+					
+					products = DAOFactory.getInstance().getProductDAO()
+							.searchByKeywords(keywords);
+					
+					productViewHelper.setKeyword(keyword);
+				}
+				else {
+					products = new ArrayList<Product>();
+					productViewHelper.setKeyword(" ");
+				}
+			}
+			else {
+				products = new ArrayList<Product>();
+				productViewHelper.setKeyword(" ");
+			}
+			break;
 		}
 
 		Basket basket = (Basket)req.getSession().getAttribute("basket");
@@ -156,5 +149,32 @@ public class ViewHelperFactory {
 		productViewHelper.setProducts(products, basket);
 		
 		return productViewHelper;
+	}
+	
+	public PurchaseViewHelper getPurchaseViewHelper(HttpServletRequest req) {
+		
+		PurchaseViewHelper purchaseViewHelper = new PurchaseViewHelper();
+		
+		purchaseViewHelper.setCustomer(
+				(Customer) req.getSession().getAttribute("loggedInCustomer"));
+		purchaseViewHelper.setBasket(
+				(Basket) req.getSession().getAttribute("basket"));
+		
+		return purchaseViewHelper;
+	}
+	
+	public BasketViewHelper getBasketViewHelper(HttpServletRequest req) {
+		
+		BasketViewHelper basketViewHelper = new BasketViewHelper();
+		
+		basketViewHelper.setBasket(
+				(Basket)req.getSession().getAttribute("basket"));
+		
+		String id;
+		if ((id = req.getParameter("id")) != null) {
+			basketViewHelper.setId(Integer.parseInt(id));
+		}
+		
+		return basketViewHelper;
 	}
 }

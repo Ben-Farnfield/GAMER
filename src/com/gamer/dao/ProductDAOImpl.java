@@ -33,31 +33,84 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public ArrayList<Product> findAllProducts() {
-		ArrayList<Product> products = new ArrayList<>();
 		
 		String sql = "SELECT * FROM product";
 		
-		Connection con = null;
-		try {
-			con = getConnection();
-			PreparedStatement statement = con.prepareStatement(sql);
-			ResultSet resultSet = statement.executeQuery();
-			while(resultSet.next()) {
-				products.add(buildProduct(resultSet));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (con != null) closeConnection(con);
-		}		
-		return products;
+		return queryForProducts(sql);
 	}
 	
 	@Override
 	public Product findProduct(int id) {
 				
-		String sql = "SELECT * FROM product WHERE productid='" + id + "'";
+		String sql = "SELECT * FROM product WHERE productid='" + id + "';";
 		
+		return queryForProduct(sql);
+	}
+	
+	@Override
+	public int findProductStock(int id) {
+		Product product = findProduct(id);
+		
+		return product.getStock();
+	}
+	
+	@Override
+	public ArrayList<Product> findAllGames() {
+		
+		String sql = "SELECT * FROM product WHERE product_type='g';";
+		
+		return queryForProducts(sql);
+	}
+	
+	@Override
+	public ArrayList<Product> findAllToys() {
+		
+		String sql = "SELECT * FROM product WHERE product_type='t';";
+		
+		return queryForProducts(sql);
+	}
+	
+	@Override
+	public ArrayList<Product> searchByKeywords(String[] keywords) {
+		
+		if (keywords.length == 0) return new ArrayList<Product>(); 
+		
+		// TODO there must be a better way !
+		String sql = "SELECT * FROM product WHERE ";
+		
+		for (String keyword : keywords) {
+			sql += "product_name ILIKE '%" + keyword 
+					+ "%' OR genre ILIKE '%" + keyword 
+					+ "%' OR description ILIKE '%" + keyword 
+					+ "%' OR ";
+		}
+		
+		sql = sql.substring(0, sql.length()-4) + ";"; // -4 to remove trailing OR
+		// ---------------------------------
+		
+		return queryForProducts(sql);
+	}
+	
+	@Override
+	public void decreaseStock(int id, int amount) {
+		
+		int stock = findProductStock(id) - amount;
+		String sql = "UPDATE product SET stock='" + stock 
+				+ "' WHERE productid='" + id + "';";
+		
+		Connection con = null;
+		try {
+			con = getConnection();
+			PreparedStatement statement = con.prepareStatement(sql);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (con != null) closeConnection(con);
+		}
+	}
+	
+	private Product queryForProduct(String sql) {
 		Product product = null;
 		Connection con = null;
 		try {
@@ -74,50 +127,8 @@ public class ProductDAOImpl implements ProductDAO {
 		return product;
 	}
 	
-	@Override
-	public ArrayList<Product> findAllGames() {
+	private ArrayList<Product> queryForProducts(String sql) {
 		ArrayList<Product> products = new ArrayList<>();
-		
-		String sql = "SELECT * FROM product WHERE product_type='g'";
-		
-		Connection con = null;
-		try {
-			con = getConnection();
-			PreparedStatement statement = con.prepareStatement(sql);
-			ResultSet resultSet = statement.executeQuery();
-			while(resultSet.next()) {
-				products.add(buildProduct(resultSet));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (con != null) closeConnection(con);
-		}		
-		return products;
-	}
-	
-	@Override
-	public ArrayList<Product> findAllToys() {		
-		return new ArrayList<>();
-	}
-	
-	@Override
-	public ArrayList<Product> searchByKeywords(String[] keywords) {
-		ArrayList<Product> products = new ArrayList<>();
-		
-		if (keywords.length == 0) return products; 
-		
-		String sql = "SELECT * FROM product WHERE ";
-		
-		for (String keyword : keywords) {
-			sql += "product_name ILIKE '%" + keyword 
-					+ "%' OR genre ILIKE '%" + keyword 
-					+ "%' OR description ILIKE '%" + keyword 
-					+ "%' OR ";
-		}
-		
-		sql = sql.substring(0, sql.length()-4) + ";"; // -4 to remove trailing OR
-		
 		Connection con = null;
 		try {
 			con = getConnection();

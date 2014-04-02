@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.gamer.dao.DAOFactory;
+import com.gamer.model.Customer;
 import com.gamer.viewhelper.RegisterViewHelper;
 import com.gamer.viewhelper.ViewHelperFactory;
 
@@ -58,16 +59,20 @@ public class RegisterController extends HttpServlet {
 			if (registerViewHelper.containsValidCustomerDetails()
 					&& !registerViewHelper.isEmailInDatabase()) {
 
+				Customer customer = registerViewHelper.createCustomer();
 				DAOFactory.getInstance().getCustomerDAO()
-						.insertCustomer(registerViewHelper.createCustomer());
-				session.setAttribute("loggedInCustomer", 
-						registerViewHelper.createCustomer());
+						.insertCustomer(customer);
+				session.setAttribute("loggedInCustomer", customer);
 				
 				if ("purchase".equals(req.getParameter("requestAction"))) {
 					url += "purchaseController";
 				}
 				else {
-					url += "RegisterSuccessful.jsp";
+					req.setAttribute("msg", "Hi " + customer.getForename() 
+							+ ", welcome to GAMER.com !");
+					req.setAttribute("link", "start shopping "
+							+ "<a href=\"/GAMER/shop?action=home\">here</a>");
+					url += "UserMsg.jsp";
 				}
 			} 
 			else {

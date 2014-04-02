@@ -14,5 +14,9 @@ public interface ProductDAO {
 	
 	public Product findProduct(int id);
 	
+	public int findProductStock(int id);
+	
 	public ArrayList<Product> searchByKeywords(String[] keywords);
+	
+	public void decreaseStock(int id, int amount);
 }

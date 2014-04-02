@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+
+div#inner-content {
+	margin: 10px;
+	padding: 20px;
+	background-color: rgba(27, 25, 22, 1);
+	border: 1px solid rgba(27, 25, 22, 1);
+	border-radius: 5px;
+}
+
+div#inner-content p#msg,
+div#basket-content p#msg {
+	text-align: center;
+	font-size: 16pt;
+	margin-top: 100px;
+}
+
+div#inner-content p#link,
+div#basket-content p#link {
+	text-align: center;
+	margin-top: 100px;
+}
+
+div#inner-content a,
+div#basket-content a {
+	color: #0087EC;
+}

@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
 
 table#bask-tab {
+	margin-top: 60px;
 	border-collapse: collapse;
 }
 
@@ -15,7 +16,7 @@ th.heading {
 }
 
 div#basket-content {
-	background-color: rgba(27, 25, 22, 0.9);
+	background-color: rgba(27, 25, 22, 1);
 	border: 1px solid rgba(27, 25, 22, 0.9);
 	border-radius: 5px;
 	margin: 10px;
@@ -72,13 +73,23 @@ td#bask-total-lab {
 }
 
 td.bask-spacer, th.bask-spacer {
-	width: 237px;
+	width: 70px;
 }
 
 td#purchase {
 	width: 960px;
 	padding: 20px 0 0 0;
 	text-align: right;
+}
+
+td.stock {
+	width: 150px;
+	text-align: right;
+	padding-right: 20px;
+}
+
+td.stock-warning {
+	color: #99FF66;
 }
 
 input.quan {
@@ -119,6 +130,7 @@ input.rem-item {
 	background-color: transparent;
 	border: 1px solid transparent;
 	color: rgb(255, 255, 255);
+	margin-left: 10px;
 }
 
 input.rem-item:hover {

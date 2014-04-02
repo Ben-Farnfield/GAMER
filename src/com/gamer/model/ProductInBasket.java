@@ -34,4 +34,8 @@ public class ProductInBasket implements Serializable {
 	public void removeOneProduct() { 
 		if (quantity > 0) quantity--;
 	}
+	
+	public boolean isEnoughStock() {
+		return quantity <= product.getStock();
+	}
 }

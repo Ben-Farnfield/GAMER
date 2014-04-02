@@ -7,13 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.gamer.model.Basket;
-import com.gamer.model.BasketImpl;
-import com.gamer.model.BasketLineUpdate;
-import com.gamer.model.ProductInBasket;
-import com.google.gson.Gson;
+import com.gamer.viewhelper.BasketViewHelper;
+import com.gamer.viewhelper.ViewHelperFactory;
 
 /**
  * 
@@ -41,90 +38,56 @@ public class BasketController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) 
 			throws ServletException, IOException {
 		
-		HttpSession session = req.getSession(true);
-		
 		String action = (String)req.getParameter("action");
 		if (action == null) action = "";
-		
-		String id = req.getParameter("id");
-		
-		Basket basket = (Basket)session.getAttribute("basket");
-		if (basket == null) {
-			basket = new BasketImpl();
-			session.setAttribute("basket", basket);
+
+		if (req.getSession().getAttribute("basket") == null) {
+			req.getSession().setAttribute("basket", new Basket());
 		}
+		
+		BasketViewHelper basketViewHelper = 
+				ViewHelperFactory.getInstance().getBasketViewHelper(req);
+		
+		String json;
 		
 		switch (action) {
 		case "basket":
-			session.setAttribute(
-					"allProductsInBasket", basket.getAllProductsInBasket());
-			getServletContext().getRequestDispatcher("/Basket.jsp").forward(req, res);
+			String url = "/";
+			if (basketViewHelper.basketIsEmpty()) {
+				req.setAttribute("msg", "There are currently no items in your basket");
+				req.setAttribute("link", "back to "
+						+ "<a href=\"/GAMER/shop?action=home\">shopping</a>");
+				url += "UserMsg.jsp";
+			}
+			else {
+				url += "Basket.jsp";
+			}
+			getServletContext().getRequestDispatcher(url).forward(req, res);
 			break;
 		
 		case "add-to-basket":
-			if (id != null) {
-				basket.addOneToBasket(Integer.parseInt(id));
-
-				ProductInBasket prodInBasket = 
-						basket.getProductInBasket(Integer.parseInt(id));
+			json = basketViewHelper.addOneToBasket();
 				
-				String json = buildBasketLineUpdateJson(basket, prodInBasket);
-				
-				res.setContentType("application/json");
-			    res.setCharacterEncoding("UTF-8");
-			    res.getWriter().write(json);
-			}
+			res.setContentType("application/json");
+		    res.setCharacterEncoding("UTF-8");
+		    res.getWriter().write(json);
 			break;
 
 		case "rem-from-basket":
-			if (id != null) {
+			json = basketViewHelper.removeOneFromBasket();
 				
-				ProductInBasket prodInBasket = basket.getProductInBasket(Integer.parseInt(id));
-				
-				basket.removeOneFromBasket(Integer.parseInt(id));
-
-				// TODO fix this so you no longer get null
-				if (basket.getProductInBasket(Integer.parseInt(id)) != null) {
-					prodInBasket = basket.getProductInBasket(Integer.parseInt(id));
-				} else {
-					prodInBasket.setQuantity(0);
-				}
-				
-				String json = buildBasketLineUpdateJson(basket, prodInBasket);
-				
-				res.setContentType("application/json");
-			    res.setCharacterEncoding("UTF-8");
-			    res.getWriter().write(json);
-			}
+			res.setContentType("application/json");
+			res.setCharacterEncoding("UTF-8");
+			res.getWriter().write(json);
 			break;
 			
 		case "del-from-basket":
-			if (id != null) {
-				basket.removeAllFromBasket(Integer.parseInt(id));
+			json = basketViewHelper.removeAllFromBasket();
 				
-				String json = "{\"totalNumProductsInBasket\":"+ basket.getTotalNumProductsInBasket() +", "
-						+ "\"totalCostOfBasket\":"+ basket.getTotalCostOfBasket() +"}";
-				
-				res.setContentType("application/json");
-			    res.setCharacterEncoding("UTF-8");
-			    res.getWriter().write(json);
-			}
+			res.setContentType("application/json");
+			res.setCharacterEncoding("UTF-8");
+			res.getWriter().write(json);
 			break;
 		}
-	}
-	
-	private String buildBasketLineUpdateJson(
-			Basket basket, ProductInBasket prodInBasket) {
-		
-		BasketLineUpdate baskUpdate = new BasketLineUpdate();
-		baskUpdate.setProductId(prodInBasket.getProduct().getId());
-		baskUpdate.setQuantity(prodInBasket.getQuantity());
-		baskUpdate.setLineCost(
-				prodInBasket.getQuantity() * prodInBasket.getProduct().getPrice());
-		baskUpdate.setStock(prodInBasket.getProduct().getStock());
-		baskUpdate.setTotalCostOfBasket(basket.getTotalCostOfBasket());
-		baskUpdate.setTotalNumProductsInBasket(basket.getTotalNumProductsInBasket());
-		
-		 return new Gson().toJson(baskUpdate);
 	}
 }

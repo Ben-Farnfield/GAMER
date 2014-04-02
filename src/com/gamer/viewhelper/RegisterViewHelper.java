@@ -128,6 +128,7 @@ public class RegisterViewHelper {
 		customer.setHouseNo(Integer.parseInt(UserInputUtil.formatHouseNum(houseNum)));
 		customer.setStreet(UserInputUtil.formatStreet(street));
 		customer.setPostCode(UserInputUtil.formatPostcode(postcode));
+		customer.setBalance(300);
 		return customer;
 	}
 }

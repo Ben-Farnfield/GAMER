@@ -1,17 +1,20 @@
 package com.gamer.controller;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.gamer.dao.DAOFactory;
-import com.gamer.model.Basket;
 import com.gamer.model.Customer;
+import com.gamer.viewhelper.PurchaseViewHelper;
+import com.gamer.viewhelper.ViewHelperFactory;
 
 /**
  * 
@@ -39,13 +42,45 @@ public class PurchaseController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) 
 			throws ServletException, IOException {
 		
-		// create helper ... see you in the morning :P
+		String url = "/";
+
+		PurchaseViewHelper purchaseViewHelper =
+				ViewHelperFactory.getInstance().getPurchaseViewHelper(req);
 		
-		// check users balance vs avail credit
-		
-		// check quan vs avail stock
-		
-		// update DB
-		System.out.println("purchase !");
+		Customer customer = (Customer) req.getSession().getAttribute("loggedInCustomer");
+
+		if (purchaseViewHelper.checkEnoughFunds()) {
+
+			if (purchaseViewHelper.checkEnoughStock()) {
+				purchaseViewHelper.decreaseStock();
+				purchaseViewHelper.decreaseCustomerBalance();
+				purchaseViewHelper.emptyBasket();
+				
+				DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(new Date());
+				cal.add(Calendar.DATE, 3);
+				String deliveryDate = df.format(cal.getTime());
+				
+				req.setAttribute("msg", "" + customer.getForename() 
+						+ ", your order has been successful. "
+						+ "Your item(s) will be delivered by " + deliveryDate);
+				req.setAttribute("link", "back to "
+						+ "<a href=\"/GAMER/shop?action=home\">shopping</a>");
+				url += "UserMsg.jsp";
+			}
+			else {
+				purchaseViewHelper.updateBasketStock();
+				url += "Basket.jsp";
+			}
+		}
+		else {
+			req.setAttribute("msg", "" + customer.getForename() 
+					+ ", you don't currently have enough funds available to complete this purchase");
+			req.setAttribute("link", "return to "
+					+ "<a href=\"shop?action=basket\">basket</a>");
+			url += "UserMsg.jsp";
+		}
+		getServletContext().getRequestDispatcher(url).forward(req, res);
 	}
 }
