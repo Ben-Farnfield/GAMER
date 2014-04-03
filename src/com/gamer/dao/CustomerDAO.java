@@ -12,7 +12,7 @@ public interface CustomerDAO {
 	
 	public double findCustomersBalance(int id);
 	
-	public void insertCustomer(Customer customer);
+	public int insertCustomer(Customer customer);
 	
 	public void decreaseBalance(int id, double amount);
 }

@@ -23,6 +23,9 @@
 		<jsp:include page="/res/template/Nav.jsp" flush="true"/>
 		<div id="content">
 			<div id="basket-content">
+				<c:if test="${purchaseStockIssue == 'notEnoughStock'}">
+					<p id="stock-issue">unfortunately the available stock has reduced for some of your items</p>
+				</c:if>
 				<table id="bask-tab">
 					<thead>
 						<tr>
@@ -32,7 +35,7 @@
 							<th class="heading" colspan="3">Quantity</th>
 							<th> </th>
 							<th> </th>
-							<th class="line-price heading">Price ( £ )</th>
+							<th class="line-price heading">Price</th>
 						</tr>
 					</thead>
 					<tfoot>
@@ -41,7 +44,7 @@
 							<td class="bask-spacer"> </td>
 							<td colspan="5"></td>
 							<td id="bask-total-lab">total:</td>
-							<td id="bask-total-fig" class="line-price">${basket.totalCostOfBasket}</td>
+							<td id="bask-total-fig" class="line-price">£ ${basket.totalCostOfBasket}0</td>
 						</tr>
 					</tfoot>
 					<tbody>
@@ -73,7 +76,7 @@
 							</td>
 							<td> </td>
 							<td id="line-price-${product.product.id}" class="line-price">
-								<c:out value="${product.linePrice}"/>
+								<c:out value="£ ${product.linePrice}0"/>
 							</td>
 						</tr>
 					</c:forEach>

@@ -31,7 +31,7 @@ public class PurchaseFilter implements Filter {
 				url += "purchaseController";
 			}
 			else {
-				req.setAttribute("requestAction", request.getParameter("action"));
+				req.setAttribute("requestAction", "purchase");
 				url += "Login.jsp";
 			}
 			request.getRequestDispatcher(url).forward(req, res);

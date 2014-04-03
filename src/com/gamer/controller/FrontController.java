@@ -34,6 +34,8 @@ public class FrontController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) 
 			throws ServletException, IOException {
 		
+		req.getSession(true);
+		
 		String action = (String)req.getParameter("action");
 		if (action == null) action = "";
 		

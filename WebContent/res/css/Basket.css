@@ -27,8 +27,12 @@ p#no-items {
 	margin: 110px 0px 110px 305px;
 }
 
+p#stock-issue {
+	text-align: center;
+}
+
 td.bask-item {
-	border: 2px none #59524B;
+	border: 2px none #666;
 	border-right-style: solid;
 	font-size: 16pt;
 	width: 300px;
@@ -37,7 +41,7 @@ td.bask-item {
 }
 
 th.bask-item {
-	border: 2px none #59524B;
+	border: 2px none #666;
 	border-right-style: solid;
 	width: 300px;
 	height: 30px;
@@ -45,7 +49,7 @@ th.bask-item {
 }
 
 td.line-price {
-	border: 2px none #59524B;
+	border: 2px none #666;
 	border-left-style: solid;
 	font-size: 16pt;
 	width: 100px;
@@ -58,7 +62,7 @@ th.line-price {
 }
 
 td#bask-total-fig {
-	border-color: #59524B;
+	border-color: #666;
 	border-width: 2px;
 	border-top-style: solid;
 	font-size: 16pt;
@@ -73,7 +77,7 @@ td#bask-total-lab {
 }
 
 td.bask-spacer, th.bask-spacer {
-	width: 70px;
+	width: 60px;
 }
 
 td#purchase {
@@ -83,7 +87,7 @@ td#purchase {
 }
 
 td.stock {
-	width: 150px;
+	width: 160px;
 	text-align: right;
 	padding-right: 20px;
 }
@@ -95,7 +99,7 @@ td.stock-warning {
 input.quan {
 	height: 21px;
 	width: 30px;
-	border: 1px solid #59524B;
+	border: 1px solid white;
 	background-color: white;
 	text-align: center;
 }
@@ -103,7 +107,7 @@ input.quan {
 input.quan-min {
 	height: 25px;
 	width: 25px;
-	border: 1px solid #59524B;
+	border: 1px solid #666;
 	font-size: 13pt;
 	background-color: transparent;
 	color: rgb(255, 255, 255);
@@ -116,7 +120,7 @@ input.quan-min:hover {
 input.quan-plus {
 	height: 25px;
 	width: 25px;
-	border: 1px solid #59524B;
+	border: 1px solid #666;
 	background-color: transparent;
 	color: rgb(255, 255, 255);
 }

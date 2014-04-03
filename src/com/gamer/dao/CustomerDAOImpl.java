@@ -87,7 +87,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 	}
 	
 	@Override
-	public void insertCustomer(Customer customer) {
+	public int insertCustomer(Customer customer) {
 		String sql = "INSERT INTO customer (forename, surname, house_no, "
 				+ "street, postcode, email, balance, card_no, cust_password)"
 				   + " VALUES ('" + customer.getForename() + "', '"
@@ -109,6 +109,23 @@ public class CustomerDAOImpl implements CustomerDAO {
 		} finally {
 			if (con != null) closeConnection(con);
 		}
+		
+		sql = "SELECT customer_id FROM customer WHERE email='" + customer.getEmail() + "';";
+		
+		con = null;
+		int id = 0;
+		try {
+			con = getConnection();
+			PreparedStatement statement = con.prepareStatement(sql);
+			ResultSet resultSet = statement.executeQuery();
+			if (resultSet.next()) id = resultSet.getInt("customer_id");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (con != null) closeConnection(con);
+		}
+		
+		return id;
 	}
 	
 	@Override

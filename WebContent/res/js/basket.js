@@ -67,9 +67,9 @@ function setQuantity(id, respJson) {
 }
 
 function setLineCost(id, respJson) {
-	$('#line-price-' + id).text(respJson.lineCost);
+	$('#line-price-' + id).text('£ ' + respJson.lineCost + '.00');
 }
 
 function setTotalCostOfBasket(respJson) {
-	$('#bask-total-fig').text(respJson.totalCostOfBasket);
+	$('#bask-total-fig').text('£ ' + respJson.totalCostOfBasket + '.00');
 }

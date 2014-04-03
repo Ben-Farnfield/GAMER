@@ -71,6 +71,7 @@ public class PurchaseController extends HttpServlet {
 			}
 			else {
 				purchaseViewHelper.updateBasketStock();
+				req.setAttribute("purchaseStockIssue", "notEnoughStock");
 				url += "Basket.jsp";
 			}
 		}

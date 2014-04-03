@@ -40,7 +40,7 @@ public class RegisterController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) 
 			throws ServletException, IOException {
 		
-		HttpSession session = req.getSession(true);
+		HttpSession session = req.getSession();
 		
 		String url = "/";
 		
@@ -60,8 +60,9 @@ public class RegisterController extends HttpServlet {
 					&& !registerViewHelper.isEmailInDatabase()) {
 
 				Customer customer = registerViewHelper.createCustomer();
-				DAOFactory.getInstance().getCustomerDAO()
+				int id = DAOFactory.getInstance().getCustomerDAO()
 						.insertCustomer(customer);
+				customer.setId(id);
 				session.setAttribute("loggedInCustomer", customer);
 				
 				if ("purchase".equals(req.getParameter("requestAction"))) {
