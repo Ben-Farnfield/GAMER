@@ -15,9 +15,11 @@
 }
 
 body {
-	background-image: url(/GAMER/res/img/misc/Cool-Gaming-Wallpaper.jpg);
+	/*background-image: url(/GAMER/res/img/misc/Cool-Gaming-Wallpaper.jpg);*/
+	background-image: url(/GAMER/res/img/misc/sun_rays.jpg);
 	background-attachment: fixed;
 	background-repeat: no-repeat;
+	background-position: 0px -150px;
 	font-family: 'Jura';
 	color: rgb(246, 246, 246);
 	margin: 0px;

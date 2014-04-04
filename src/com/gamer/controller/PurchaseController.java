@@ -76,8 +76,7 @@ public class PurchaseController extends HttpServlet {
 			}
 		}
 		else {
-			req.setAttribute("msg", "" + customer.getForename() 
-					+ ", you don't currently have enough funds available to complete this purchase");
+			req.setAttribute("msg", "You have insufficient funds to complete this transaction. Please contact your bank.");
 			req.setAttribute("link", "return to "
 					+ "<a href=\"shop?action=basket\">basket</a>");
 			url += "UserMsg.jsp";

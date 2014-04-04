@@ -9,11 +9,13 @@
 
 h1 {
 	margin: 115px 0px 0px 0px;
-	color: white;
-	text-shadow: 0px 0px 10px rgba(27, 25, 22, 0.8);
-	float: left;
-	font: 70pt/5px 'Linearmente';
-	padding: 5px;
+	color: #E7F3EF;
+	text-shadow: 0px 0px 10px rgba(27, 25, 22, 1);
+	font: 90pt/5px 'Linearmente';
+	padding: 10px 5px 5px 5px;
+	text-align: center;
+	font-weight: bold;
+	letter-spacing: -3px;
 }
 
 #header {
