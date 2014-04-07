@@ -76,6 +76,10 @@ fieldset.reg-log {
 	border-color: rgba(255, 255, 255, 0.2);
 }
 
+legend {
+	color: white;
+}
+
 tr.error td {
 	text-align: center;
 	color: #99FF66;

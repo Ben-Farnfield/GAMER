@@ -15,15 +15,33 @@
 }
 
 body {
-	/*background-image: url(/GAMER/res/img/misc/Cool-Gaming-Wallpaper.jpg);*/
 	background-image: url(/GAMER/res/img/misc/sun_rays.jpg);
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-position: 0px -150px;
+	background-size: 100% 1200px;
 	font-family: 'Jura';
 	color: rgb(246, 246, 246);
 	margin: 0px;
 	font-weight: bold;
+}
+
+@media (max-width: 972px) {
+    body {
+        background-size: 960px 1200px;
+    }
+}
+
+@media (min-height: 1200px) {
+	body {
+		background-size: 100% 100%;
+	}
+}
+
+@media (max-width: 972px) and (min-height: 1200px) {
+	body {
+		background-size: 960px 100%;
+	}
 }
 
 a {

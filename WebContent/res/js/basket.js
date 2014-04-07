@@ -1,8 +1,7 @@
 $(document).ready(function(){
 	$('.basket_button').click(function(){
 		var id = $(this).attr('id');
-		$.get('/GAMER/shop?action=add-to-basket&id=' + id, function(respJson) {
-        	$('img#add-basket-' + id).attr({'src':'/GAMER/res/img/misc/AddedToBasket.png', 'style':'display: none;'});
+		$.get('/GAMER/shop?action=add-to-basket&id=' + id + '&r=' + $.now(), function(respJson) {
         	setTotalNumProductsInBasket(respJson);
         	$('img#add-basket-' + id).fadeIn(300);
 		});
@@ -12,7 +11,7 @@ $(document).ready(function(){
 $(document).ready(function(){
 	$('.quan-plus').click(function(){
 		var id = $(this).attr('name');
-        $.get('/GAMER/shop?action=add-to-basket&id=' + id, function(respJson) {
+        $.get('/GAMER/shop?action=add-to-basket&id=' + id + '&r=' + $.now(), function(respJson) {
         	setTotalNumProductsInBasket(respJson);
         	setQuantity(id, respJson);
         	setLineCost(id, respJson);
@@ -24,7 +23,7 @@ $(document).ready(function(){
 $(document).ready(function(){
 	$('.quan-min').click(function(){
 		var id = $(this).attr('name');
-        $.get('/GAMER/shop?action=rem-from-basket&id=' + id, function(respJson) {
+        $.get('/GAMER/shop?action=rem-from-basket&id=' + id + '&r=' + $.now(), function(respJson) {
         	setTotalNumProductsInBasket(respJson);
         	setQuantity(id, respJson);
         	setLineCost(id, respJson);
@@ -36,7 +35,7 @@ $(document).ready(function(){
 $(document).ready(function(){
 	$('.rem-item').click(function(){
 		var id = $(this).attr('name');
-		$.get('/GAMER/shop?action=del-from-basket&id=' + id, function(respJson) {
+		$.get('/GAMER/shop?action=del-from-basket&id=' + id + '&r=' + $.now(), function(respJson) {
         	
         	if (respJson.totalNumProductsInBasket > 0) { // remove row
         		$('#row-' + id).fadeOut(500, function(){

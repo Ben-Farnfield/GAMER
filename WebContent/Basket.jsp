@@ -85,7 +85,8 @@
 				<table>
 					<tr>
 						<td id="purchase">
-							<form action="shop?action=purchase" method="post">
+							<form action="shop" method="get">
+								<input type="hidden" name="action"	value="purchase">
 								<input id="pur-button" type="submit" value="Purchase"/>
 							</form>
 						</td>
